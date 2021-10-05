@@ -14,12 +14,12 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_Fog: 1
+  m_FogColor: {r: 0.7169812, g: 0.6283353, b: 0.47686014, a: 1}
+  m_FogMode: 1
+  m_FogDensity: 0.015
   m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogEnd: 92.03
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.94965744, g: 0.23085779, b: 0.09409149, a: 1}
+  m_IndirectSpecularColor: {r: 0.96284413, g: 0.23053314, b: 0.09276277, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -164,7 +164,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77152156}
-  m_LocalRotation: {x: 0.055067524, y: -0.032285832, z: 0.0017815372, w: 0.99795896}
+  m_LocalRotation: {x: 0.055067528, y: -0.032285832, z: 0.0017815372, w: 0.99795896}
   m_LocalPosition: {x: 0.44355118, y: -0.4814849, z: 1.5854532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -645,8 +645,8 @@ GameObject:
   - component: {fileID: 350447080}
   - component: {fileID: 350447079}
   - component: {fileID: 350447078}
-  - component: {fileID: 350447077}
   - component: {fileID: 350447081}
+  - component: {fileID: 350447077}
   m_Layer: 8
   m_Name: E3
   m_TagString: Untagged
@@ -654,8 +654,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &350447077
-CapsuleCollider:
+--- !u!64 &350447077
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -664,10 +664,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &350447078
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -849,7 +849,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -859,7 +859,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.691
+    m_Strength: 0.434
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -1116,6 +1116,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 2304376152854054778, guid: 76513b7927e51884ebe976ede60324b8,
+        type: 3}
+      propertyPath: m_TerrainData
+      value: 
+      objectReference: {fileID: 15600000, guid: 730af5498cc9c2140a8cacbdb963bbcc,
+        type: 2}
     - target: {fileID: 2304376152932522372, guid: 76513b7927e51884ebe976ede60324b8,
         type: 3}
       propertyPath: m_Size.y
@@ -1150,8 +1156,8 @@ GameObject:
   - component: {fileID: 626053430}
   - component: {fileID: 626053429}
   - component: {fileID: 626053428}
-  - component: {fileID: 626053427}
   - component: {fileID: 626053431}
+  - component: {fileID: 626053427}
   m_Layer: 8
   m_Name: E2
   m_TagString: Untagged
@@ -1159,8 +1165,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &626053427
-CapsuleCollider:
+--- !u!64 &626053427
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1169,10 +1175,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &626053428
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1263,8 +1269,8 @@ GameObject:
   - component: {fileID: 704902052}
   - component: {fileID: 704902051}
   - component: {fileID: 704902050}
-  - component: {fileID: 704902049}
   - component: {fileID: 704902053}
+  - component: {fileID: 704902049}
   m_Layer: 8
   m_Name: E1
   m_TagString: Untagged
@@ -1272,8 +1278,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &704902049
-CapsuleCollider:
+--- !u!64 &704902049
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1282,10 +1288,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &704902050
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2009,7 +2015,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374744251}
-  m_LocalRotation: {x: 0.06429427, y: -0.2079878, z: 0.017130006, w: 0.9758657}
+  m_LocalRotation: {x: 0.06429428, y: -0.20798782, z: 0.017130006, w: 0.9758657}
   m_LocalPosition: {x: 4.0740085, y: 1.2838894, z: -3.3224115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2140,10 +2146,7 @@ MonoBehaviour:
   shootRange: 10
   bullet: {fileID: 7134742485691588794, guid: 2c301b038ecf0b64ab9c257eafa38fba, type: 3}
   shootPoint: {fileID: 1014416745}
-  WhoIsEnemy:
-    serializedVersion: 2
-    m_Bits: 256
-  enemy: []
+  crosshairOffset: {x: 0, y: 0, z: 1}
   crosshairPsition: []
 --- !u!95 &1483748117
 Animator:
@@ -2335,7 +2338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757372286}
-  m_LocalRotation: {x: 0.06429427, y: -0.2079878, z: 0.017130006, w: 0.9758657}
+  m_LocalRotation: {x: 0.06429428, y: -0.20798782, z: 0.017130006, w: 0.9758657}
   m_LocalPosition: {x: 3.6679003, y: 2.3652859, z: -3.2401056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
