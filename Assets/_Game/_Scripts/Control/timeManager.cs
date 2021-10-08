@@ -9,7 +9,9 @@ namespace guns.Control
     {
         public float slowdownFactor = 0.05f;
         public float slowdownLength = 2f;
-        private float slowdownLimit = 0;
+
+        [HideInInspector]
+        public float slowdownLimit = 0;
 
         public bool timeTriggered;
 
@@ -19,11 +21,14 @@ namespace guns.Control
         {
             if (reduceTime)
             {
-                slowdownLimit -= Time.deltaTime;
+                if(slowdownLimit>0)
+                    slowdownLimit -= Time.deltaTime;
+
                 if (slowdownLimit <= 0)
                 {
                     Time.timeScale = 1;
                     reduceTime = false;
+                    FindObjectOfType<GameManager>().CinemachineCam.SetBool("3to1", false);
                     FindObjectOfType<GameManager>().StartShooting = true;
                 }
             }
@@ -31,6 +36,7 @@ namespace guns.Control
             if (FindObjectOfType<GameManager>().TapCount == FindObjectOfType<GameManager>().maxTapCount+1)
             {
                 Time.timeScale = 1;
+                FindObjectOfType<GameManager>().CinemachineCam.SetBool("3to1", false);
             }
         }
         public void DoSlowmotion()

@@ -10,36 +10,60 @@ namespace guns.Control
         public GameObject bullet;
         public Transform shootPoint;
 
-        public float shootForce = 10;
-        public float shootTime = 2;
+        public Vector2 MaxXYOffset;
+        public Vector2 MinXYOffset;
 
 
+        public float health;
+
+        public float targetHeightOffset;
+        public float fireForce = 10;
+        public float fireRate = 2;
+
+        private Vector3 directionToShoot;
         private Transform player_position;
-        private float shootTimeData = 0;
+        private float fireTimeData = 0;
 
         private void Start()
         {
-            player_position = GameObject.Find("Player").transform;
+            player_position = GameObject.Find("Player").transform.GetChild(0).GetChild(3).transform;
         }
 
         private void Update()
         {
-            shootTimeData -= Time.deltaTime;
-            shootPoint.transform.LookAt(player_position.position);
-
-            if(shootTimeData <= 0)
+            fireTimeData -= Time.deltaTime;
+            shootPoint.transform.LookAt(directionToShoot);
+            lookAtPlayerInRange();
+            if (fireTimeData <= 0)
             {
                 shoot();
-                shootTimeData = shootTime;
+                fireTimeData = fireRate;
             }
 
+        }
+
+        float x, y;
+        public void lookAtPlayerInRange()
+        {
+           
+            x = Random.Range(player_position.position.x + MaxXYOffset.x, player_position.position.x - MinXYOffset.x );
+            y = Random.Range(player_position.position.y + MaxXYOffset.y,  player_position.position.y - MinXYOffset.y);
+
+            directionToShoot = new Vector3(x, y, 0);
         }
 
         void shoot()
         {
             GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
-            Bullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * shootForce, ForceMode.Impulse);
+            Bullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * fireForce, ForceMode.Impulse);
             Destroy(Bullet, 3f);
+        }
+
+
+
+        public void die()
+        {
+
         }
     }
 }
