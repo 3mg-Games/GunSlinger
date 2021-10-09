@@ -47,6 +47,7 @@ namespace guns.Control
                 shoot();
                 fireTimeData = xTime;
             }
+            die();
 
         }
 
@@ -89,9 +90,9 @@ namespace guns.Control
         {
             if(health <= 0 && !isDead)
             {
-                FindObjectOfType<EnemyWaveProgress>().KillEnemyInCurrentWave();
                 anime.SetTrigger("Die");
                 Destroy(gameObject, 2);
+                FindObjectOfType<EnemyWaveProgress>().KillEnemyInCurrentWave();
                 isDead = true;
             }
         }

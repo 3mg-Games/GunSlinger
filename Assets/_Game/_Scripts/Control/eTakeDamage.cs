@@ -15,8 +15,7 @@ namespace guns.Control
             try
             {
                 controller.health -= value;
-                if (controller.health <= 0)
-                    controller.die();
+                
             }
             catch
             {

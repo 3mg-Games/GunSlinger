@@ -52,9 +52,39 @@ namespace guns.Control
             /*FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);*/
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
 
+        private void OnTriggerEnter(Collider other)
+        {
+            try
+            {
+                etakedam = other.transform.GetComponent<eTakeDamage>();
+                switch (etakedam.damageType)
+                {
+                    case eTakeDamage.collisionType.Head:etakedam.HIT(FindObjectOfType<playerController>().damageAmount);
+                        Destroy(Instantiate(FindObjectOfType<GameManager>().PS, transform.position, Quaternion.identity), 2f);
+                        break;
+
+                    case eTakeDamage.collisionType.Body: etakedam.HIT(FindObjectOfType<playerController>().damageAmount / 2);
+                        Destroy(Instantiate(FindObjectOfType<GameManager>().NS, transform.position, Quaternion.identity), 2f);
+                        other.gameObject.GetComponent<enemyContoller>().anime.SetTrigger("Take Damage");
+                        break;
+
+                    case eTakeDamage.collisionType.Arm: armDetect();
+                        break;
+                }
+                Destroy(gameObject);
+            }
+            catch
+            {
+                print("Erorr......");
+            }
+        }
+
+
+
+
+        /*private void OnCollisionEnter(Collision other)
+        {
             try
             {
                 etakedam = other.transform.GetComponent<eTakeDamage>();
@@ -77,7 +107,7 @@ namespace guns.Control
             {
                 print("Erorr......");
             }
-        }
+        }*/
         void armDetect()
         {
             int x = Random.Range(0, 2);

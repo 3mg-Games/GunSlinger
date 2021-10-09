@@ -325,12 +325,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c052059c5fee70d47840744fa3517f67, type: 3}
---- !u!4 &730227597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6360767428653956976, guid: 741d5b2ae19207249b87371d41063643,
-    type: 3}
-  m_PrefabInstance: {fileID: 6903812877306981413}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1414258868
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,17 +2526,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 730227597}
+      objectReference: {fileID: 0}
     - target: {fileID: 2670827494272947898, guid: 3078dcb21d8fd1f4aaca64eec8853568,
         type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 730227597}
+      objectReference: {fileID: 0}
     - target: {fileID: 2670827495021184921, guid: 3078dcb21d8fd1f4aaca64eec8853568,
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 730227597}
+      objectReference: {fileID: 0}
     - target: {fileID: 2670827495021184921, guid: 3078dcb21d8fd1f4aaca64eec8853568,
         type: 3}
       propertyPath: m_LookAt
@@ -2862,7 +2856,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be0b16061a14c04ba58dc92af5dcf7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentScene: 0
+  NextScene: 0
   CinemachineCam: {fileID: 7923282040707231023}
+  collection: {fileID: 0}
   crosshair: {fileID: 2375067016713889180, guid: a2d2e5a46e6cba44894cfbb59a4999f5,
     type: 3}
   PS: {fileID: 5527777809079203368, guid: dbe88da5d61053e48949875a9f21349c, type: 3}
@@ -2873,11 +2870,13 @@ MonoBehaviour:
   reloadDelay: 1.5
   maxTapCount: 6
   NumOfHenchmanToKill: 3
+  numberOfBulletsUsed: 0
   TapCount: 0
   killedHenchman: 0
   StartShooting: 0
   StartTapping: 0
   Reload: 0
+  GameOver: 0
   source: {fileID: 7923282040477202735}
   BulletFiredbyPlayer: {fileID: 8300000, guid: 82ae00c3cc0996a42b0bf3c4d837f7fb, type: 3}
   BulletFiredbyEnemy: {fileID: 8300000, guid: 3b4a946f86d79654189b70e00b95d05f, type: 3}

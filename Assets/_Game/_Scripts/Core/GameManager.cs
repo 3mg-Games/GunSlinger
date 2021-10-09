@@ -52,7 +52,7 @@ namespace guns.Core
         public AudioClip ReloadGun;
         public AudioClip LevelComplete;
 
-        private void Start()
+        private void Awake()
         {
             UI();
         }
@@ -181,13 +181,8 @@ namespace guns.Core
 
         private void UI()
         {
-            FindObjectOfType<EnemyWaveProgress>().currentWaveTotalEnemies = NumOfHenchmanToKill;
             FindObjectOfType<EnemyWaveProgress>().ActivateCurrentWave(true);
-
-            if (FindObjectOfType<GameOverUI>().L3)
-            {
-                FindObjectOfType<EnemyWaveProgress>().NextWave();
-            }
+            FindObjectOfType<EnemyWaveProgress>().currentWaveTotalEnemies = NumOfHenchmanToKill;
 
         }
 

@@ -1010,9 +1010,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986acda18ff091c469220e8e41445c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - {fileID: 4604759565568374368}
-  - {fileID: 4604759565712474579}
+  UIProg: {fileID: 0}
+  crossMark: []
+  currentWaveTotalEnemies: 0
+  currentWaveCurrentEnemyIdx: 0
 --- !u!1 &4604759567302050192
 GameObject:
   m_ObjectHideFlags: 0

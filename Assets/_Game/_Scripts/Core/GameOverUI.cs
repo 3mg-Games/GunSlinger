@@ -27,6 +27,7 @@ namespace guns.Core
 
         IEnumerator winGame(float T)
         {
+            yield return new WaitForSeconds(0.3f);
             FindObjectOfType<EnemyWaveProgress>().ActivateCurrentWave(false);
             yield return new WaitForSeconds(T);
             WinUI.SetActive(true);

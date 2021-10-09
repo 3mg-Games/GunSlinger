@@ -19,20 +19,22 @@ namespace guns.Control
 {
     public class EnemyWaveProgress : MonoBehaviour
     {
-        [SerializeField] GameObject[] waves;   // serialize all the enemy waves gameobjects in the inspector
+
+        #region dummy
+        /*public List<GameObject> waves = new List<GameObject>();
+        // [SerializeField] GameObject[] waves;   // serialize all the enemy waves gameobjects in the inspector
 
         int currentWaveIdx;
         int wavesLength;
-       public int currentWaveCurrentEnemyIdx;
-       public int currentWaveTotalEnemies;
+        public int currentWaveCurrentEnemyIdx;
+        public int currentWaveTotalEnemies;
         GameObject currentWave;
         // Start is called before the first frame update
         void Start()
         {
             currentWaveIdx = 0;
-
             wavesLength = 0;
-            wavesLength = waves.Length;
+            wavesLength = waves.Count;
         }
 
         // Update is called once per frame
@@ -40,19 +42,19 @@ namespace guns.Control
         {
             //all the call the statements in this function are just for testing purpose
 
-            /* if (Input.GetButtonDown("Fire1"))
+            *//* if (Input.GetButtonDown("Fire1"))
                  ActivateCurrentWave(true);
              if (Input.GetButtonDown("Fire2"))
                  ActivateCurrentWave(false);
              if (Input.GetButtonDown("Fire3"))
                  NextWave();
              if (Input.GetButtonDown("Jump"))
-                 KillEnemyInCurrentWave(); */
+                 KillEnemyInCurrentWave(); *//*
         }
 
         public void ActivateCurrentWave(bool val)  // use this function to activate or deactivate
         {                                    // the current enemy wave progress ui
-            if (currentWaveIdx < wavesLength)
+            if (currentWaveIdx <= wavesLength)
             {
                 currentWave = waves[currentWaveIdx];
                 currentWave.SetActive(val);
@@ -81,14 +83,35 @@ namespace guns.Control
                 currentWaveCurrentEnemyIdx++;
             }
 
-            /*
+            *//*
             if(currentWaveCurrentEnemyIdx >= currentWaveTotalEnemies)
             {
                 ActivateCurrentWave(false);
                 NextWave();
             }
 
-        */
+        *//*
+        }*/
+        #endregion
+        public GameObject UIProg;
+        public List<GameObject> crossMark = new List<GameObject>();
+
+        public int currentWaveTotalEnemies;
+        public int currentWaveCurrentEnemyIdx;
+
+
+        public void ActivateCurrentWave(bool val)
+        {
+            UIProg.SetActive(val);
         }
+        public void KillEnemyInCurrentWave()
+        {
+            crossMark[currentWaveCurrentEnemyIdx].SetActive(true);
+            if (currentWaveCurrentEnemyIdx <= crossMark.Count)
+            {
+                currentWaveCurrentEnemyIdx++;                
+            }
+        }
+
     }
 }
