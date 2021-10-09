@@ -9,7 +9,14 @@ namespace guns.Core
 {
     public class GameManager : MonoBehaviour
     {
+        [Header("Scene Count")]
+        public int CurrentScene;
+        public int NextScene;
+
+
+
         public Animator CinemachineCam;
+        public Transform collection;
 
         [Header("Prefebs")]
         public GameObject crosshair;
@@ -18,38 +25,108 @@ namespace guns.Core
         [Header("Float")]
         public float slowMotionDelay = 0.5f;
         public float reloadDelay = 0.5f;
-        public int maxTapCount = 6;
 
+        [Header("Int")]
+        public int maxTapCount = 6;
+        public int NumOfHenchmanToKill = 3;
+        public int numberOfBulletsUsed;
+
+        //[HideInInspector]
+        public int TapCount = 1;
 
         [HideInInspector]
-        public int TapCount = 0;
+        public int killedHenchman;
 
         [Header("Bool")]
         public bool StartShooting;
+        public bool StartTapping;
         public bool Reload;
+        public bool GameOver;
+
+        [Header("Audio")]
+        public AudioSource source;
+
+        public AudioClip BulletFiredbyPlayer;
+        public AudioClip BulletFiredbyEnemy;
+        public AudioClip EnemyBulletImpactOnGround;
+        public AudioClip ReloadGun;
+        public AudioClip LevelComplete;
+
+        private void Start()
+        {
+            UI();
+        }
         private void Update()
         {
-            tapToLeaveCover();
-            reload();
-            restart();
+            if (!GameOver)
+            {
+                tapToLeaveCover();
+                reload();
+            }           
+            win();
         }
+
+
+
+
+        void win()
+        {
+            if (FindObjectOfType<EnemyWaveProgress>().currentWaveCurrentEnemyIdx >= FindObjectOfType<EnemyWaveProgress>().currentWaveTotalEnemies)
+            {
+                GameOver = true;
+                FindObjectOfType<playerMovement>().anime.SetTrigger("win");
+                FindObjectOfType<playerController>().enabled = false;
+            }
+        }
+
 
 
         void reload()
         {
-            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count)
+            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count && !Reload)
             {
-                StartCoroutine(returnCameraIdle(reloadDelay));
+                if (TapCount < maxTapCount)
+                {
+                    StartCoroutine(lightReload(reloadDelay));
+                }
+            }
+            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count && !Reload)
+            {
+                if (TapCount >= maxTapCount)
+                {
+                    StartCoroutine(heavyReload(reloadDelay));
+                }
             }
         }
 
-
-        void restart()
+        IEnumerator heavyReload(float t)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            //FindObjectOfType<playerController>().animationRig.weight = 0;
+            yield return new WaitForSeconds(t);
+            FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");
+            foreach (Transform obj in collection)
             {
-                SceneManager.LoadScene(0);
+                Destroy(obj.gameObject);
             }
+            FindObjectOfType<playerController>().crosshairPosition.Clear();
+            FindObjectOfType<playerController>().crosshairPlacingNumber = 0;
+            FindObjectOfType<playerController>().rotationCount = 0;
+            FindObjectOfType<playerController>().crosshairTransforms.Clear();
+            FindObjectOfType<timeManager>().timeTriggered = false;
+            TapCount = 1;
+            StartShooting = false;
+            Reload = true;
+        }
+
+
+        public void restart()
+        {
+                SceneManager.LoadScene(CurrentScene);
+        }
+
+        public void next()
+        {
+            SceneManager.LoadScene(NextScene);
         }
 
         void tapToLeaveCover()
@@ -57,25 +134,39 @@ namespace guns.Core
             if (!FindObjectOfType<playerMovement>().isWalking)
             {
                 if (Input.GetMouseButtonDown(0) && !StartShooting && TapCount <= maxTapCount)
-                {
-                    TapCount++;
-                    FindObjectOfType<playerController>().raycaster();
+                {                    
+                    if (StartTapping)
+                    {
+                        TapCount++;
+                        FindObjectOfType<playerController>().raycaster();
+                    }
+
                     if (!FindObjectOfType<timeManager>().timeTriggered)
                     {
                         FindObjectOfType<BulletTimeSlider>().setDefsultValueToSlider(FindObjectOfType<timeManager>().slowdownLength);
+
                         StartCoroutine(startSlowmotion(slowMotionDelay));
                         CinemachineCam.SetBool("3to1", true);
                         FindObjectOfType<playerMovement>().anime.SetTrigger("stand");
                         FindObjectOfType<timeManager>().timeTriggered = true;
                     }
                 }
+                
+                if (Input.GetMouseButtonUp(0) && !StartShooting && TapCount <= maxTapCount)
+                {
+                    if (StartTapping)
+                    {
+                        FindObjectOfType<playerController>().CrosshairPlacer();
+                    }
+                }
             }            
         }
 
-        IEnumerator returnCameraIdle(float t)
-        {
-            FindObjectOfType<playerController>().animationRig.weight = 0;
+        IEnumerator lightReload(float t)
+        {            
+            //FindObjectOfType<playerController>().animationRig.weight = 0;
             yield return new WaitForSeconds(t);            
+
             FindObjectOfType<timeManager>().timeTriggered = false;
             StartShooting = false;
             Reload = true;
@@ -87,6 +178,19 @@ namespace guns.Core
             FindObjectOfType<timeManager>().DoSlowmotion();
 
         }
+
+        private void UI()
+        {
+            FindObjectOfType<EnemyWaveProgress>().currentWaveTotalEnemies = NumOfHenchmanToKill;
+            FindObjectOfType<EnemyWaveProgress>().ActivateCurrentWave(true);
+
+            if (FindObjectOfType<GameOverUI>().L3)
+            {
+                FindObjectOfType<EnemyWaveProgress>().NextWave();
+            }
+
+        }
+
     }
 
 }

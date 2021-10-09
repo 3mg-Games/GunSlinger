@@ -1,69 +1,99 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using guns.Core;
 
 namespace guns.Control
 {
     public class enemyContoller : MonoBehaviour
     {
-        public Material mat1;
+        public Animator anime;
+
         public GameObject bullet;
         public Transform shootPoint;
 
         public Vector2 MaxXYOffset;
         public Vector2 MinXYOffset;
+        public Vector2 normalFireRateMaxMin;
+        public Vector3 offset;
+
 
 
         public float health;
 
         public float targetHeightOffset;
         public float fireForce = 10;
-        public float fireRate = 2;
-
-        private Vector3 directionToShoot;
-        private Transform player_position;
+        public float bulletTimeFireRateMultipliar;
+        public Transform player_position;
+        [HideInInspector]
+        public Vector3 directionToShoot;
         private float fireTimeData = 0;
+        private float xTime;
 
         private void Start()
         {
-            player_position = GameObject.Find("Player").transform.GetChild(0).GetChild(3).transform;
+            //player_position = GameObject.Find("Player").transform.GetChild(0).GetChild(3).transform;
         }
 
         private void Update()
         {
+
+
             fireTimeData -= Time.deltaTime;
-            shootPoint.transform.LookAt(directionToShoot);
-            lookAtPlayerInRange();
-            if (fireTimeData <= 0)
+            transform.LookAt(directionToShoot);
+            if (fireTimeData <= 0 && !isDead)
             {
+                radomTime();
                 shoot();
-                fireTimeData = fireRate;
+                fireTimeData = xTime;
             }
 
         }
 
         float x, y;
-        public void lookAtPlayerInRange()
-        {
-           
-            x = Random.Range(player_position.position.x + MaxXYOffset.x, player_position.position.x - MinXYOffset.x );
-            y = Random.Range(player_position.position.y + MaxXYOffset.y,  player_position.position.y - MinXYOffset.y);
-
-            directionToShoot = new Vector3(x, y, 0);
-        }
+        
 
         void shoot()
         {
-            GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
-            Bullet.GetComponent<Rigidbody>().AddForce(shootPoint.forward * fireForce, ForceMode.Impulse);
-            Destroy(Bullet, 3f);
+            if (shootPoint == null)
+                return;
+
+            if(shootPoint != null)
+            {
+                lookAtPlayerInRange();
+                GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
+                Bullet.GetComponent<Rigidbody>().AddForce((transform.forward+offset) * fireForce, ForceMode.Impulse);
+                Destroy(Bullet, 3f);
+            }            
+        }
+
+        public void lookAtPlayerInRange()
+        {
+            x = Random.Range(player_position.position.x + MaxXYOffset.x, player_position.position.x - MinXYOffset.x);
+            y = Random.Range(player_position.position.y + MaxXYOffset.y, player_position.position.y - MinXYOffset.y);
+            directionToShoot = new Vector3(x, y, player_position.position.z);
+        }
+
+        void radomTime()
+        {
+            if(!FindObjectOfType<timeManager>().timeTriggered)
+                xTime = Random.Range(normalFireRateMaxMin.x , normalFireRateMaxMin.y);
+            if(FindObjectOfType<timeManager>().timeTriggered)
+                xTime = Random.Range(normalFireRateMaxMin.x / bulletTimeFireRateMultipliar, normalFireRateMaxMin.y / bulletTimeFireRateMultipliar);
         }
 
 
+        bool isDead = false;
 
         public void die()
         {
-
+            if(health <= 0 && !isDead)
+            {
+                FindObjectOfType<EnemyWaveProgress>().KillEnemyInCurrentWave();
+                anime.SetTrigger("Die");
+                Destroy(gameObject, 2);
+                isDead = true;
+            }
         }
     }
 }

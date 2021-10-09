@@ -20,7 +20,7 @@ namespace guns.Control
             }
             catch
             {
-                print("Enemy Controller is missing............");
+                print("Enemy Controller is missing............" + transform.name);
             }
         }
     }
