@@ -18,6 +18,8 @@ namespace guns.Control
         private void Start()
         {
             StartCoroutine(soundDelay(soundDelayTime));
+
+
         }
         private void Update()
         {
@@ -27,6 +29,20 @@ namespace guns.Control
             {
                 trailTimer = time;
                 trail.time -= Time.deltaTime;
+            }
+            expand();
+
+
+        }
+
+        [SerializeField]float d;
+        void expand()
+        {
+            if(target !=null)
+                d = Vector3.Distance(transform.position, target.position);
+            if (d <= 2)
+            {
+                GetComponent<SphereCollider>().radius += speed * Time.deltaTime;
             }
         }
 
@@ -39,6 +55,8 @@ namespace guns.Control
             }
             catch
             {
+                if (target == null)
+                    Destroy(this.gameObject);
                 print("target is missing.........");
             }
                         
@@ -62,22 +80,26 @@ namespace guns.Control
                 {
                     case eTakeDamage.collisionType.Head:etakedam.HIT(FindObjectOfType<playerController>().damageAmount);
                         Destroy(Instantiate(FindObjectOfType<GameManager>().PS, transform.position, Quaternion.identity), 2f);
+                        //Destroy(this.gameObject);
                         break;
 
                     case eTakeDamage.collisionType.Body: etakedam.HIT(FindObjectOfType<playerController>().damageAmount / 2);
                         Destroy(Instantiate(FindObjectOfType<GameManager>().NS, transform.position, Quaternion.identity), 2f);
                         other.gameObject.GetComponent<enemyContoller>().anime.SetTrigger("Take Damage");
+                        //Destroy(this.gameObject);
                         break;
 
                     case eTakeDamage.collisionType.Arm: armDetect();
+                        //Destroy(this.gameObject);
                         break;
-                }
-                Destroy(gameObject);
+                }                
             }
             catch
             {
                 print("Erorr......");
             }
+
+            Destroy(this.gameObject);
         }
 
 

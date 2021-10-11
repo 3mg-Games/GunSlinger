@@ -136,7 +136,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.6
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.025
@@ -230,5 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e1f34d210159244b784ba98d6df839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trail: {fileID: 2170213886615452291}
   speed: 25
   target: {x: 0, y: 0, z: 0}
+  time: 0.5

@@ -7,9 +7,11 @@ namespace guns.Control
 {
     public class enemyBulletControl : MonoBehaviour
     {
-
+        public TrailRenderer trail;
         public float speed = 50;
         public Vector3 target;
+        public float time = 1;
+        private float trailTimer = 0;
         private void Start()
         {
             FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyEnemy, 0.7f);
@@ -18,6 +20,15 @@ namespace guns.Control
 
         private void Update()
         {
+            trailTimer += Time.deltaTime;
+            if (trailTimer >= time)
+            {
+                trailTimer = time;
+                trail.time -= Time.deltaTime;
+            }
+
+
+
             //target = FindObjectOfType<enemyContoller>().directionToShoot;
             //TravalToThePlayer();
         }
