@@ -96,5 +96,11 @@ namespace guns.Control
                 isDead = true;
             }
         }
+
+        public void TNTHit()
+        {
+            health = 0;
+            die();
+        }
     }
 }

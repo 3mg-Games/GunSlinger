@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using guns.Control;
 
 /* HOW TO USE
  * Serialize all the required fields and place the TNT gameobject where required.
@@ -64,7 +62,7 @@ public class Tnt : MonoBehaviour
         hasExploded = val;
     }
 
-
+    [SerializeField] Collider[] colliders;
     private void Explode()
     {
         
@@ -73,7 +71,7 @@ public class Tnt : MonoBehaviour
 
         Destroy(explosion, explosionEffectDuration);    //destroy explosion Vfx after certain duration
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);  //storing all colliders in an array which are in the blast radius.
+        /*Collider[]*/ colliders = Physics.OverlapSphere(transform.position, radius);  //storing all colliders in an array which are in the blast radius.
         foreach(Collider nearbyObject in colliders)
         {
             if(nearbyObject.tag == "Enemy")       // if nearby object has an 'Enemy' tag, then only apply blast force to it and trigger its death.
@@ -84,15 +82,22 @@ public class Tnt : MonoBehaviour
                 {
                     rb.isKinematic = false;
                     rb.AddExplosionForce(force, transform.position, radius);
-                    nearbyObject.GetComponent<EnemyHenchman>().Die();     //calling the die function in enemy.
+                    nearbyObject.GetComponent<enemyContoller>().TNTHit();
+                    //calling the die function in enemy.
                 }
             }
         }
 
         AudioSource.PlayClipAtPoint(explosionSfx, transform.position, explosionSfxVolume);
 
-        Destroy(gameObject);
-       
-      
+        //Destroy(gameObject);
+        destroy();
+
+
+    }
+
+    void destroy()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
     }
 }
