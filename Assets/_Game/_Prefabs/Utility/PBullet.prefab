@@ -136,7 +136,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.05
+  m_Time: 0.025
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.025
@@ -231,7 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 2170213886615452291}
-  speed: 100
-  time: 0.05
-  soundDelayTime: 0.05
+  speed: 500
+  time: 0.025
+  soundDelayTime: 0
   target: {fileID: 0}
+  d: 0

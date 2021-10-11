@@ -32,7 +32,7 @@ namespace guns.Control
 
         void shootSound()
         {
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);        
+            //FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);        
         }
 
         void ResetTime()

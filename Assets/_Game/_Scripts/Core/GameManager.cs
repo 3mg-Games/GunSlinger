@@ -85,29 +85,39 @@ namespace guns.Core
 
         void reload()
         {
-            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count && !Reload)
+            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairPlacingNumber && !Reload)
             {
+                
                 if (TapCount < maxTapCount)
                 {
-                    StartCoroutine(lightReload(reloadDelay));
+                    StartCoroutine(lightReload(0));
                 }
                 if (TapCount >= maxTapCount)
                 {
                     StartCoroutine(heavyReload(reloadDelay));
                 }
-                StartShooting = false;
+                
             }
+
+            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count + 1)
+                StartCoroutine(resetTime(0.2f));
+                
+        }
+
+        IEnumerator resetTime(float t)
+        {
+            yield return new WaitForSeconds(t);
+            Time.timeScale = 1;
         }
 
         IEnumerator heavyReload(float t)
         {
-            //FindObjectOfType<playerController>().animationRig.weight = 0;
-            yield return new WaitForSeconds(t);
-            FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");
+            yield return new WaitForSeconds(t);            
             foreach (Transform obj in collection)
             {
                 Destroy(obj.gameObject);
             }
+            FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");
             FindObjectOfType<playerController>().crosshairPosition.Clear();
             FindObjectOfType<playerController>().crosshairPlacingNumber = 0;
             FindObjectOfType<playerController>().rotationCount = 0;
@@ -115,6 +125,7 @@ namespace guns.Core
             FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0,0,0);
             FindObjectOfType<timeManager>().timeTriggered = false;
             TapCount = 1;
+            StartShooting = false;
             Reload = true;
         }
 
@@ -165,16 +176,15 @@ namespace guns.Core
         IEnumerator lightReload(float t)
         {
             yield return new WaitForSeconds(t);
-            
-            //FindObjectOfType<playerController>().animationRig.weight = 0;
+            FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");
             FindObjectOfType<playerController>().crosshairPosition.Clear();
             FindObjectOfType<playerController>().crosshairPlacingNumber = 0;
             FindObjectOfType<playerController>().rotationCount = 0;
             FindObjectOfType<playerController>().crosshairTransforms.Clear();
             FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0, 0, 0);
             FindObjectOfType<timeManager>().timeTriggered = false;            
+            StartShooting = false;
             Reload = true;
-            FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");
         }
         IEnumerator startSlowmotion(float t)
         {

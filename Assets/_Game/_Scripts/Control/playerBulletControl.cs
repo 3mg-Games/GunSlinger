@@ -18,8 +18,6 @@ namespace guns.Control
         private void Start()
         {
             StartCoroutine(soundDelay(soundDelayTime));
-
-
         }
         private void Update()
         {
@@ -67,7 +65,7 @@ namespace guns.Control
         IEnumerator soundDelay(float t)
         {
             yield return new WaitForSeconds(t);
-            /*FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);*/
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);
         }
 
 

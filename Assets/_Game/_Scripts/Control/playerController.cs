@@ -22,7 +22,7 @@ namespace guns.Control {
 
         public float fireDelayTime = 1;
         public List<Vector3> crosshairPosition = new List<Vector3>();
-        [HideInInspector]public List<Transform> crosshairTransforms = new List<Transform>();
+        public List<Transform> crosshairTransforms = new List<Transform>();
 
         float shoot;
 
@@ -36,18 +36,17 @@ namespace guns.Control {
             if (shoot > 0)
                 shoot -= Time.deltaTime;
 
-            if (FindObjectOfType<GameManager>().StartShooting && rotationCount < crosshairTransforms.Count)
+            if (FindObjectOfType<GameManager>().StartShooting && rotationCount < crosshairPlacingNumber)
             {                
                 if (shoot <= 0)
                 {
                     fire();
                     shoot = shootDelayTime;
+                    FindObjectOfType<playerMovement>().anime.Play("Shooting");
                 }
             }
-            if(crosshairTransforms.Count >= 1 && rotationCount <= crosshairTransforms.Count && FindObjectOfType<GameManager>().StartShooting)
+            if(crosshairPlacingNumber > 0 && rotationCount <= crosshairPlacingNumber && FindObjectOfType<GameManager>().StartShooting)
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-            //shootPoint.rotation = Quaternion.Lerp(shootPoint.rotation, rotation, rotationSpeed * Time.deltaTime);
-            //Rotation.rotation = Quaternion.Lerp(Rotation.rotation, rotation, rotationSpeed * Time.deltaTime);
         }
         public void raycaster()
         {
@@ -73,7 +72,6 @@ namespace guns.Control {
                 crosshairTransforms.Add(c_hair.transform);
                 crosshairPlacingNumber++;
             }
-    
         }
 
         private Transform rotationShootTarget;
@@ -83,30 +81,19 @@ namespace guns.Control {
 
         public void fire()
         {
-            if (crosshairTransforms.Count < 1)
-                return;
-
-            if (crosshairTransforms.Count >= 1 /*&& rotationCount < crosshairTransforms.Count+1*/)
-            {                
-                rotationShootTarget = (crosshairTransforms[rotationCount]);
-                Vector3 direction = rotationShootTarget.position - transform.position;
-                rotation = Quaternion.LookRotation(direction + rotationOffset);
-                StartCoroutine(spwanEvent(fireDelayTime, crosshairTransforms[rotationCount]));
-                rotationCount++;
-            }
-                
+            rotationShootTarget = (crosshairTransforms[rotationCount]);
+            Vector3 direction = rotationShootTarget.position - transform.position;
+            rotation = Quaternion.LookRotation(direction + rotationOffset);
+            StartCoroutine(spwanEvent(fireDelayTime, crosshairTransforms[rotationCount]));            
         }
 
         IEnumerator spwanEvent(float t, Transform obj)
-        {
-            FindObjectOfType<playerMovement>().anime.Play("Shooting");           
+        {                     
             yield return new WaitForSeconds(t);            
             GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             Bullet.GetComponent<playerBulletControl>().target = obj;
             FindObjectOfType<GameManager>().numberOfBulletsUsed++;
+            rotationCount++;
         }
-
-
     }
-
 }
