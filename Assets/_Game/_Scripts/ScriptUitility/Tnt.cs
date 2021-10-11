@@ -90,14 +90,9 @@ public class Tnt : MonoBehaviour
 
         AudioSource.PlayClipAtPoint(explosionSfx, transform.position, explosionSfxVolume);
 
-        //Destroy(gameObject);
-        destroy();
+        Destroy(gameObject);
 
 
     }
 
-    void destroy()
-    {
-        GetComponent<MeshRenderer>().enabled = false;
-    }
 }

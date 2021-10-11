@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using guns.Core;
+using guns.Control;
 
 namespace guns.movement
 {
@@ -57,7 +58,9 @@ namespace guns.movement
             {
                 if (!isTookCover)
                 {
+
                     anime.SetBool("Take Cover", true);
+                    FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0, 0, 0);
                     isTookCover = true;
 
                 }

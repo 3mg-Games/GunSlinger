@@ -44,7 +44,7 @@ namespace guns.Control {
                     shoot = shootDelayTime;
                 }
             }
-            if(crosshairTransforms.Count >= 1 && rotationCount < crosshairTransforms.Count)
+            if(crosshairTransforms.Count >= 1 && rotationCount <= crosshairTransforms.Count && FindObjectOfType<GameManager>().StartShooting)
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
             //shootPoint.rotation = Quaternion.Lerp(shootPoint.rotation, rotation, rotationSpeed * Time.deltaTime);
             //Rotation.rotation = Quaternion.Lerp(Rotation.rotation, rotation, rotationSpeed * Time.deltaTime);
@@ -77,7 +77,7 @@ namespace guns.Control {
         }
 
         private Transform rotationShootTarget;
-        [HideInInspector]public int rotationCount = 0;
+        public int rotationCount = 0;
         private Quaternion rotation;
 
 
@@ -86,7 +86,7 @@ namespace guns.Control {
             if (crosshairTransforms.Count < 1)
                 return;
 
-            if (crosshairTransforms.Count >= 1 && rotationCount < crosshairTransforms.Count)
+            if (crosshairTransforms.Count >= 1 /*&& rotationCount < crosshairTransforms.Count+1*/)
             {                
                 rotationShootTarget = (crosshairTransforms[rotationCount]);
                 Vector3 direction = rotationShootTarget.position - transform.position;

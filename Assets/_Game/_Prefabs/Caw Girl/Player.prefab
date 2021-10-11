@@ -161,11 +161,11 @@ MonoBehaviour:
   shootPoint: {fileID: 3619313220568586181}
   crosshairOffset: {x: 0, y: 0, z: 0.05}
   rotationOffset: {x: -0.7, y: -0.8, z: 0}
-  fireForce: 50
-  shootDelayTime: 1.1
+  fireForce: 200
+  shootDelayTime: 0.12222223
   damageAmount: 100
-  rotationSpeed: 15
-  fireDelayTime: 0.8
+  rotationSpeed: 135
+  fireDelayTime: 0.0888889
   crosshairPosition: []
   crosshairTransforms: []
   crosshairPlacingNumber: 0

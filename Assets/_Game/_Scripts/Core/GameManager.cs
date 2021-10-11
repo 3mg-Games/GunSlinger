@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 using guns.movement;
 using guns.Control;
@@ -17,7 +18,7 @@ namespace guns.Core
 
         public Animator CinemachineCam;
         public Transform collection;
-
+        public TextMeshProUGUI BulletCount;
         [Header("Prefebs")]
         public GameObject crosshair;
         public GameObject PS, NS, OPS, TA;
@@ -60,6 +61,7 @@ namespace guns.Core
         {
             if (!GameOver)
             {
+                BulletCount.text = numberOfBulletsUsed.ToString();
                 tapToLeaveCover();
                 reload();
             }           
@@ -112,7 +114,10 @@ namespace guns.Core
             FindObjectOfType<playerController>().crosshairPlacingNumber = 0;
             FindObjectOfType<playerController>().rotationCount = 0;
             FindObjectOfType<playerController>().crosshairTransforms.Clear();
+            FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0,0,0);
             FindObjectOfType<timeManager>().timeTriggered = false;
+
+
             TapCount = 1;
             StartShooting = false;
             Reload = true;
@@ -165,9 +170,13 @@ namespace guns.Core
         IEnumerator lightReload(float t)
         {            
             //FindObjectOfType<playerController>().animationRig.weight = 0;
-            yield return new WaitForSeconds(t);            
-
-            FindObjectOfType<timeManager>().timeTriggered = false;
+            yield return new WaitForSeconds(t);
+            FindObjectOfType<playerController>().crosshairPosition.Clear();
+            FindObjectOfType<playerController>().crosshairPlacingNumber = 0;
+            FindObjectOfType<playerController>().rotationCount = 0;
+            FindObjectOfType<playerController>().crosshairTransforms.Clear();
+            FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0, 0, 0);
+            FindObjectOfType<timeManager>().timeTriggered = false;            
             StartShooting = false;
             Reload = true;
             FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");

@@ -34,5 +34,10 @@ namespace guns.Control
         {
             FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);        
         }
+
+        void ResetTime()
+        {
+            Time.timeScale = 1;
+        }
     }
 }
