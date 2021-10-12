@@ -19,6 +19,7 @@ namespace guns.Core
         public Animator CinemachineCam;
         public Transform collection;
         public TextMeshProUGUI BulletCount;
+        public TextMeshProUGUI TextFeedback;
         [Header("Prefebs")]
         public GameObject crosshair;
         public GameObject PS, NS, OPS, TA;
@@ -66,11 +67,24 @@ namespace guns.Core
                 reload();
             }           
             win();
+
+
+
+            if(Time.timeScale == 1)
+            {
+                TextFeedback.transform.GetComponentInParent<Animator>().speed = 1;
+            }else if (Time.timeScale<1)
+            {
+                TextFeedback.transform.GetComponentInParent<Animator>().speed = 40;
+            }
         }
 
-
-
-
+        public void feedback(Color c, string s)
+        {
+            TextFeedback.text = s;
+            TextFeedback.color = c;
+            TextFeedback.transform.GetComponentInParent<Animator>().Play("spwan");
+        }
         void win()
         {
             if (FindObjectOfType<EnemyWaveProgress>().currentWaveCurrentEnemyIdx >= FindObjectOfType<EnemyWaveProgress>().currentWaveTotalEnemies)

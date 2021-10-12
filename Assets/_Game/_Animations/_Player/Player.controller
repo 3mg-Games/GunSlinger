@@ -193,7 +193,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shooting
-  m_Speed: 14.4
+  m_Speed: 100
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7462459769260018528}
@@ -208,7 +208,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bf563919a582bfe43b9740ce8bae263f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2deeb28afa3669746ac7c58cbd654b06, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

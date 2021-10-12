@@ -40,7 +40,7 @@ namespace guns.Control
 
 
             fireTimeData -= Time.deltaTime;
-            transform.LookAt(directionToShoot);
+            transform.LookAt(directionToShoot );
             if (fireTimeData <= 0 && !isDead)
             {
                 radomTime();
@@ -62,6 +62,7 @@ namespace guns.Control
             if(shootPoint != null)
             {
                 lookAtPlayerInRange();
+                anime.SetTrigger("Shoot");
                 GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
                 Bullet.GetComponent<Rigidbody>().AddForce((transform.forward+offset) * fireForce, ForceMode.Impulse);
                 Destroy(Bullet, 3f);

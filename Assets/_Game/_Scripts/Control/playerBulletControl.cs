@@ -77,12 +77,12 @@ namespace guns.Control
                 switch (etakedam.damageType)
                 {
                     case eTakeDamage.collisionType.Head:etakedam.HIT(FindObjectOfType<playerController>().damageAmount);
-                        Destroy(Instantiate(FindObjectOfType<GameManager>().PS, transform.position, Quaternion.identity), 2f);
+                        FindObjectOfType<GameManager>().feedback(Color.green,"Perfect Shot");
                         //Destroy(this.gameObject);
                         break;
 
                     case eTakeDamage.collisionType.Body: etakedam.HIT(FindObjectOfType<playerController>().damageAmount / 2);
-                        Destroy(Instantiate(FindObjectOfType<GameManager>().NS, transform.position, Quaternion.identity), 2f);
+                        FindObjectOfType<GameManager>().feedback(Color.green, "Nice Shot");
                         other.gameObject.GetComponent<enemyContoller>().anime.SetTrigger("Take Damage");
                         //Destroy(this.gameObject);
                         break;
@@ -100,41 +100,14 @@ namespace guns.Control
             Destroy(this.gameObject);
         }
 
-
-
-
-        /*private void OnCollisionEnter(Collision other)
-        {
-            try
-            {
-                etakedam = other.transform.GetComponent<eTakeDamage>();
-                switch (etakedam.damageType)
-                {
-                    case eTakeDamage.collisionType.Head: etakedam.HIT(FindObjectOfType<playerController>().damageAmount);
-                        Destroy(Instantiate(FindObjectOfType<GameManager>().PS, transform.position, Quaternion.identity), 2f);
-                        break;
-
-                    case eTakeDamage.collisionType.Body: etakedam.HIT(FindObjectOfType<playerController>().damageAmount / 2);
-                        Destroy(Instantiate(FindObjectOfType<GameManager>().NS, transform.position, Quaternion.identity), 2f);
-                        other.gameObject.GetComponent<enemyContoller>().anime.SetTrigger("Take Damage");
-                        break;
-                    case eTakeDamage.collisionType.Arm: armDetect();
-                        break;
-                }
-                Destroy(gameObject);
-            }
-            catch
-            {
-                print("Erorr......");
-            }
-        }*/
         void armDetect()
         {
+            Destroy(GetComponent<SphereCollider>());
             int x = Random.Range(0, 2);
-            if (x == 1)            
-                Destroy(Instantiate(FindObjectOfType<GameManager>().TA, transform.position, Quaternion.identity), 2f);
-            if(x==0)
-                Destroy(Instantiate(FindObjectOfType<GameManager>().OPS, transform.position, Quaternion.identity), 2f);
+            if (x == 1)
+                FindObjectOfType<GameManager>().feedback(Color.red, "Try Again");
+            if (x==0)
+                FindObjectOfType<GameManager>().feedback(Color.red, "Opps");
         }
     }
 }

@@ -37,16 +37,16 @@ namespace guns.Control {
                 shoot -= Time.deltaTime;
 
             if (FindObjectOfType<GameManager>().StartShooting && rotationCount < crosshairPlacingNumber)
-            {                
+            {
+                FindObjectOfType<playerMovement>().anime.Play("Shooting");
                 if (shoot <= 0)
                 {
                     fire();
                     shoot = shootDelayTime;
-                    FindObjectOfType<playerMovement>().anime.Play("Shooting");
                 }
             }
-            if(crosshairPlacingNumber > 0 && rotationCount <= crosshairPlacingNumber && FindObjectOfType<GameManager>().StartShooting)
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+            /*if(crosshairPlacingNumber > 0 && rotationCount <= crosshairPlacingNumber && FindObjectOfType<GameManager>().StartShooting)
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);*/
         }
         public void raycaster()
         {
@@ -84,7 +84,9 @@ namespace guns.Control {
             rotationShootTarget = (crosshairTransforms[rotationCount]);
             Vector3 direction = rotationShootTarget.position - transform.position;
             rotation = Quaternion.LookRotation(direction + rotationOffset);
-            StartCoroutine(spwanEvent(fireDelayTime, crosshairTransforms[rotationCount]));            
+            Quaternion rt = Quaternion.LookRotation(direction);
+            StartCoroutine(spwanEvent(fireDelayTime, crosshairTransforms[rotationCount]));
+            transform.rotation = Quaternion.Slerp(transform.rotation, rt, rotationSpeed/* * Time.deltaTime*/);
         }
 
         IEnumerator spwanEvent(float t, Transform obj)
