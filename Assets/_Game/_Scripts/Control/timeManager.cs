@@ -24,14 +24,18 @@ namespace guns.Control
         {
             if (reduceTime)
             {
-                if(slowdownLimit>0)
+                if (slowdownLimit > 0)
+                {
                     slowdownLimit -= Time.deltaTime;
+                    FindObjectOfType<GameManager>().BulletTimer.SetActive(true);
+                }
 
                 if (slowdownLimit <= 0)
                 {
                     //Time.timeScale = 1;
                     reduceTime = false;
                     FindObjectOfType<GameManager>().CinemachineCam.SetBool("3to1", false);
+                    FindObjectOfType<GameManager>().BulletTimer.SetActive(false);
                     FindObjectOfType<GameManager>().StartShooting = true;
                 }
             }
@@ -48,9 +52,9 @@ namespace guns.Control
             }
 
 
-            if (FindObjectOfType<GameManager>().TapCount == FindObjectOfType<GameManager>().maxTapCount+1)
+            if (FindObjectOfType<GameManager>().TapCount == FindObjectOfType<GameManager>().maxTapCount)
             {
-                Time.timeScale = 1;
+                slowdownLimit = 0;
                 FindObjectOfType<GameManager>().CinemachineCam.SetBool("3to1", false);
             }
         }

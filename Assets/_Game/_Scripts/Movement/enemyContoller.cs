@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using guns.Core;
+using guns.movement;
 
 namespace guns.Control
 {
@@ -11,12 +12,11 @@ namespace guns.Control
 
         public GameObject bullet;
         public Transform shootPoint;
-
+        public List<GameObject> colliders = new List<GameObject>();
         public Vector2 MaxXYOffset;
         public Vector2 MinXYOffset;
         public Vector2 normalFireRateMaxMin;
         public Vector3 offset;
-        public Vector3 targetOffset;
 
 
 
@@ -28,32 +28,44 @@ namespace guns.Control
         public Transform player_position;
         [HideInInspector]
         public Vector3 directionToShoot;
-        private float fireTimeData = 0;
         private float xTime;
+        private float fireTimeData;
 
-        private void Start()
+        private void Awake()
         {
-            //player_position = GameObject.Find("Player").transform.GetChild(0).GetChild(3).transform;
+            fireTimeData = 0.5f;
         }
 
         private void Update()
         {
-
-
-            fireTimeData -= Time.deltaTime;
-            transform.LookAt(directionToShoot + targetOffset);
+            if (!anime.GetCurrentAnimatorStateInfo(0).IsName("BCover") && FindObjectOfType<playerMovement>().inPosition)
+            {
+                fireTimeData -= Time.deltaTime;
+                transform.LookAt(directionToShoot);
+            }
+                
             if (fireTimeData <= 0 && !isDead)
             {
+                lookAtPlayerInRange();
                 radomTime();
                 shoot();
                 fireTimeData = xTime;
             }
             die();
-
+            check();
         }
 
         float x, y;
         
+
+
+        public void check()
+        {
+            if (FindObjectOfType<playerMovement>().inPosition)
+            {
+                anime.SetTrigger("Shoot");               
+            }
+        }
 
         void shoot()
         {
@@ -61,9 +73,7 @@ namespace guns.Control
                 return;
 
             if(shootPoint != null)
-            {
-                lookAtPlayerInRange();
-                anime.SetTrigger("Shoot");
+            {                              
                 GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
                 Bullet.GetComponent<Rigidbody>().AddForce((transform.forward+offset) * fireForce, ForceMode.Impulse);
                 Destroy(Bullet, 3f);
@@ -95,6 +105,10 @@ namespace guns.Control
                 anime.SetTrigger("Die");
                 Destroy(gameObject, 2);
                 FindObjectOfType<EnemyWaveProgress>().KillEnemyInCurrentWave();
+                for(int i=0;i< colliders.Count; i++)
+                {
+                    colliders[i].GetComponent<Collider>().enabled = false;
+                }
                 isDead = true;
             }
         }

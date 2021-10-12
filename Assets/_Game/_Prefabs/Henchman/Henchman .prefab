@@ -108,11 +108,17 @@ MonoBehaviour:
   anime: {fileID: 7238874566876880434}
   bullet: {fileID: 7134742485691588794, guid: 60f014d21db3b444d823605ed4cc7b66, type: 3}
   shootPoint: {fileID: 2708146676468809485}
-  MaxXYOffset: {x: 0.5, y: 0.5}
+  colliders:
+  - {fileID: 2708146676901981224}
+  - {fileID: 3075974793939441477}
+  - {fileID: 6363085677429487770}
+  - {fileID: 4401779706884094392}
+  - {fileID: 4971531071761040385}
+  - {fileID: 703701683994521269}
+  MaxXYOffset: {x: 0.5, y: -0.39}
   MinXYOffset: {x: 0.5, y: 0}
   normalFireRateMaxMin: {x: 0.5, y: 2.5}
   offset: {x: 0, y: -0.1, z: 0}
-  targetOffset: {x: 0, y: 0, z: 0}
   health: 100
   targetHeightOffset: 0
   fireForce: 25

@@ -22,7 +22,7 @@ namespace guns.Core
         public TextMeshProUGUI TextFeedback;
         [Header("Prefebs")]
         public GameObject crosshair;
-        public GameObject PS, NS, OPS, TA;
+        public GameObject BulletTimer;
 
         [Header("Float")]
         public float slowMotionDelay = 0.5f;
@@ -62,7 +62,7 @@ namespace guns.Core
         {
             if (!GameOver)
             {
-                BulletCount.text = numberOfBulletsUsed.ToString();
+                BulletCount.text = " Bullet Used : "+numberOfBulletsUsed.ToString();
                 tapToLeaveCover();
                 reload();
             }           
@@ -94,9 +94,6 @@ namespace guns.Core
                 FindObjectOfType<playerController>().enabled = false;
             }
         }
-
-
-
         void reload()
         {
             if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairPlacingNumber && !Reload)
@@ -142,8 +139,6 @@ namespace guns.Core
             StartShooting = false;
             Reload = true;
         }
-
-
         public void restart()
         {
                 SceneManager.LoadScene(CurrentScene);
@@ -169,7 +164,6 @@ namespace guns.Core
                     if (!FindObjectOfType<timeManager>().timeTriggered)
                     {
                         FindObjectOfType<BulletTimeSlider>().setDefsultValueToSlider(FindObjectOfType<timeManager>().slowdownLength);
-
                         StartCoroutine(startSlowmotion(slowMotionDelay));
                         CinemachineCam.SetBool("3to1", true);
                         FindObjectOfType<playerMovement>().anime.SetTrigger("stand");
@@ -206,7 +200,6 @@ namespace guns.Core
             FindObjectOfType<timeManager>().DoSlowmotion();
 
         }
-
         private void UI()
         {
             FindObjectOfType<EnemyWaveProgress>().ActivateCurrentWave(true);
@@ -214,6 +207,11 @@ namespace guns.Core
 
         }
 
+        public void ShootButton()
+        {
+            FindObjectOfType<timeManager>().slowdownLimit = 0;
+            StartShooting = true;
+        }
     }
 
 }
