@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 2708146676901981229}
   - component: {fileID: 3633003002023413606}
   - component: {fileID: 841218485234010804}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: 'Henchman '
   m_TagString: Enemy
   m_Icon: {fileID: 0}

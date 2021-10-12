@@ -78,17 +78,17 @@ namespace guns.Control
                 {
                     case eTakeDamage.collisionType.Head:etakedam.HIT(FindObjectOfType<playerController>().damageAmount);
                         FindObjectOfType<GameManager>().feedback(Color.green,"Perfect Shot");
-                        //Destroy(this.gameObject);
+                        Destroy(this.gameObject);
                         break;
 
                     case eTakeDamage.collisionType.Body: etakedam.HIT(FindObjectOfType<playerController>().damageAmount / 2);
                         FindObjectOfType<GameManager>().feedback(Color.green, "Nice Shot");
                         other.gameObject.GetComponent<enemyContoller>().anime.SetTrigger("Take Damage");
-                        //Destroy(this.gameObject);
+                        Destroy(this.gameObject);
                         break;
 
                     case eTakeDamage.collisionType.Arm: armDetect();
-                        //Destroy(this.gameObject);
+                        Destroy(this.gameObject);
                         break;
                 }                
             }
