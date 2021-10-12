@@ -52,11 +52,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2708146676468809484}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 32, y: 132.8, z: 118.5}
-  m_LocalScale: {x: 102.555084, y: 102.55508, z: 102.555084}
+  m_LocalPosition: {x: 0.015, y: 1.26, z: 1.168}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4072336346557799445}
-  m_RootOrder: 2
+  m_Father: {fileID: 2708146676901981228}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &2708146676901981224
 GameObject:
@@ -89,6 +89,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4072336346557799445}
+  - {fileID: 2708146676468809485}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -107,10 +108,11 @@ MonoBehaviour:
   anime: {fileID: 7238874566876880434}
   bullet: {fileID: 7134742485691588794, guid: 60f014d21db3b444d823605ed4cc7b66, type: 3}
   shootPoint: {fileID: 2708146676468809485}
-  MaxXYOffset: {x: 1, y: 0.5}
+  MaxXYOffset: {x: 0.5, y: 0.5}
   MinXYOffset: {x: 0.5, y: 0}
   normalFireRateMaxMin: {x: 0.5, y: 2.5}
   offset: {x: 0, y: -0.1, z: 0}
+  targetOffset: {x: 0, y: 0, z: 0}
   health: 100
   targetHeightOffset: 0
   fireForce: 25
@@ -980,17 +982,17 @@ PrefabInstance:
     - target: {fileID: 5465940246521907071, guid: 63d78daac2776c64db1e9e44f8b55393,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -11.716512
+      value: -10.55
       objectReference: {fileID: 0}
     - target: {fileID: 5465940246521907071, guid: 63d78daac2776c64db1e9e44f8b55393,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 27.801622
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5465940246521907071, guid: 63d78daac2776c64db1e9e44f8b55393,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -3.1287334
+      value: 0.034
       objectReference: {fileID: 0}
     - target: {fileID: 6000407479487422213, guid: 63d78daac2776c64db1e9e44f8b55393,
         type: 3}

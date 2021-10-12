@@ -16,6 +16,7 @@ namespace guns.Control
         public Vector2 MinXYOffset;
         public Vector2 normalFireRateMaxMin;
         public Vector3 offset;
+        public Vector3 targetOffset;
 
 
 
@@ -40,7 +41,7 @@ namespace guns.Control
 
 
             fireTimeData -= Time.deltaTime;
-            transform.LookAt(directionToShoot );
+            transform.LookAt(directionToShoot + targetOffset);
             if (fireTimeData <= 0 && !isDead)
             {
                 radomTime();
