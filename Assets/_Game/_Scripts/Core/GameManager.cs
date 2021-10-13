@@ -20,6 +20,7 @@ namespace guns.Core
         public Transform collection;
         public TextMeshProUGUI BulletCount;
         public TextMeshProUGUI TextFeedback;
+        public TextMeshProUGUI bulletCountText;
         [Header("Prefebs")]
         public GameObject crosshair;
         public GameObject BulletTimer;
@@ -63,6 +64,7 @@ namespace guns.Core
             if (!GameOver)
             {
                 BulletCount.text = " Bullet Used : "+numberOfBulletsUsed.ToString();
+                bulletCountText.text = numberOfBulletsUsed.ToString();
                 tapToLeaveCover();
                 reload();
             }           

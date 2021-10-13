@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using guns.Core;
 using guns.movement;
+using TMPro;
 
 namespace guns.Control {
     public class playerController : MonoBehaviour
@@ -23,6 +24,8 @@ namespace guns.Control {
         public float fireDelayTime = 1;
         public List<Vector3> crosshairPosition = new List<Vector3>();
         public List<Transform> crosshairTransforms = new List<Transform>();
+
+       
 
         float shoot;
 
@@ -94,6 +97,10 @@ namespace guns.Control {
             yield return new WaitForSeconds(t);            
             GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             Bullet.GetComponent<playerBulletControl>().target = obj;
+
+           
+
+          
             FindObjectOfType<GameManager>().numberOfBulletsUsed++;
             rotationCount++;
         }
