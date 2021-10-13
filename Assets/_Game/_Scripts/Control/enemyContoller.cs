@@ -117,7 +117,7 @@ namespace guns.Control
             if (ot.gameObject.CompareTag("Enemy"))
                 health = 0;
 
-            if (ot.gameObject.CompareTag("Shootable"))
+            else if (ot.gameObject.CompareTag("Shootable"))
                 health = 0;
         }
 

@@ -18,6 +18,9 @@ public class TrafficLight : MonoBehaviour
     [SerializeField] GameObject redLight;
     [SerializeField] GameObject greenLight;
     [SerializeField] Train train;
+    [SerializeField] Outline outline;
+    [SerializeField] GameObject sparkVfxPrefab;
+    [SerializeField] float duartionOfSparkVfx = 1.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,14 +39,19 @@ public class TrafficLight : MonoBehaviour
     {
         if(other.tag == "Player Projectile")   //if   colliding gameobject has 'Player Projectile' tag
         {                                      // then swich lights and activate the train
-            ActivateTrainProtocol();
+            ActivateTrainProtocol(other);
         }
     }
 
-    private void ActivateTrainProtocol()
+    private void ActivateTrainProtocol(Collider other)
     {
+        GameObject sparkVfx = Instantiate(sparkVfxPrefab,
+            other.transform.position,
+            Quaternion.identity);
+        Destroy(sparkVfx, duartionOfSparkVfx);
         redLight.SetActive(false);
         greenLight.SetActive(true);
         train.ActivateTrain();
+        outline.enabled = false;
     }
 }
