@@ -9,30 +9,51 @@ namespace guns.movement
 {
     public class playerMovement : MonoBehaviour
     {
-        private NavMeshAgent agent;
-
-        public Transform[] waypoint;
-
+        [HideInInspector]public NavMeshAgent agent;
+        public WayPoint wp;
         public Animator anime;
+        public float rediusForCheckNextWayPoint = 5;
+
         public bool isWalking = false;
-        public bool inPosition = false;
 
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
         }
-
+        float checkTime = 2;
         private void Update()
         {
-            walkingBool();
-            walkPoint();
-            movementAnimationTrigger();
-
-
-            if(waypoint.Length < 0)
+            if (wp != null)
             {
-                return;
+                walkingBool();
+                walkPoint();
+                movementAnimationTrigger();
             }
+
+            if (wp==null)
+            {
+                checkTime -= Time.deltaTime;
+                if(checkTime>0)
+                    checkForNearestWayPoint();                
+            }
+        }
+        public void checkForNearestWayPoint()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, rediusForCheckNextWayPoint);
+            foreach(Collider nearbyWP in colliders)
+            {
+                if (nearbyWP.gameObject.CompareTag("wayP"))
+                    wp = nearbyWP.gameObject.GetComponent<WayPoint>();
+            }
+/*            if (wp!=null || checkTime <= 0)
+            {
+                
+                for (int i = 0; i < colliders.Length - 1; i++)
+                {
+                    colliders[i] = null;
+                }
+            }*/
+                
         }
 
         void walkingBool()
@@ -51,10 +72,10 @@ namespace guns.movement
         }
 
         bool isntRot = false;
-        bool isTookCover = false;
+        [HideInInspector] public bool isTookCover = false;
         void movementAnimationTrigger()
         {
-            if (!isWalking && inPosition)
+            if (!isWalking && wp.isPlayerRecherdHere)
             {
                 if (!isTookCover)
                 {
@@ -69,7 +90,7 @@ namespace guns.movement
                     //transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
-            if (!isWalking && !inPosition)
+            if (!isWalking && !wp.isPlayerRecherdHere)
             {
                 if (!isntRot)
                     rotationD();
@@ -80,9 +101,9 @@ namespace guns.movement
         }
         void walkPoint()
         {
-            if (!inPosition)
+            if (!wp.isPlayerRecherdHere)
             {
-                agent.SetDestination(waypoint[0].position);
+                agent.SetDestination(wp.transform.position);
             }
         }
         Quaternion rotation;
@@ -95,13 +116,13 @@ namespace guns.movement
         {
             if (other.gameObject.CompareTag("wayP"))
             {
-                inPosition = true;
+                wp.isPlayerRecherdHere = true;
                 //rotationD();
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            inPosition = false;
+            wp.isPlayerRecherdHere = false;
         }
 
 

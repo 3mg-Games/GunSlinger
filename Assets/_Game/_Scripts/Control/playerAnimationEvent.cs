@@ -35,6 +35,10 @@ namespace guns.Control
             //FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer);        
         }
 
+        void resetCover()
+        {
+            FindObjectOfType<playerMovement>().anime.SetBool("Take Cover", false); ;
+        }
         void ResetTime()
         {
             Time.timeScale = 1;

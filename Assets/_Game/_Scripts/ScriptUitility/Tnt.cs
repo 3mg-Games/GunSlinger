@@ -61,8 +61,6 @@ public class Tnt : MonoBehaviour
     {
         hasExploded = val;
     }
-
-    [SerializeField] Collider[] colliders;
     private void Explode()
     {
         
@@ -71,7 +69,7 @@ public class Tnt : MonoBehaviour
 
         Destroy(explosion, explosionEffectDuration);    //destroy explosion Vfx after certain duration
 
-        /*Collider[]*/ colliders = Physics.OverlapSphere(transform.position, radius);  //storing all colliders in an array which are in the blast radius.
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);  //storing all colliders in an array which are in the blast radius.
         foreach(Collider nearbyObject in colliders)
         {
             if(nearbyObject.tag == "Enemy")       // if nearby object has an 'Enemy' tag, then only apply blast force to it and trigger its death.

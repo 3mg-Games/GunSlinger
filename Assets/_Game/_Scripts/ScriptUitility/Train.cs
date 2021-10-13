@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using guns.Control;
 
 /* No need to call this script as it will be called by
  * 'TrafficLight' script when bullet hits the 'Traffic Light' gameobject.
@@ -26,11 +27,11 @@ public class Train : MonoBehaviour
     {
       //  Debug.Log("Enemy knock off happened");
         
-        EnemyHenchman enemyHenchman = other.GetComponent<EnemyHenchman>();
+        enemyContoller enemyHenchman = other.GetComponent<enemyContoller>();
         if(enemyHenchman)
         {
             other.GetComponent<Rigidbody>().isKinematic = false;   //set the rigidbody of enemey to Kinematic
-            enemyHenchman.Die();           // activate death anim on enemy
+            enemyHenchman.health = 0;        // activate death anim on enemy
         }
     }
 

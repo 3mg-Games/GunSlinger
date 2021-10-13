@@ -12,36 +12,42 @@ namespace guns.Control
 
         public GameObject bullet;
         public Transform shootPoint;
-        public List<GameObject> colliders = new List<GameObject>();
+        public Transform player_position;
+        public WayPoint wp;
         public Vector2 MaxXYOffset;
         public Vector2 MinXYOffset;
         public Vector2 normalFireRateMaxMin;
         public Vector3 offset;
+        [SerializeField]private Vector3 FirstDirectionToShoot;
 
 
 
         public float health;
-
+        public float RotationSpeed = 50;
         public float targetHeightOffset;
         public float fireForce = 10;
+
         public float bulletTimeFireRateMultipliar;
-        public Transform player_position;
-        [HideInInspector]
-        public Vector3 directionToShoot;
+
+      
+        public List<GameObject> colliders = new List<GameObject>();
+        [HideInInspector]public Vector3 directionToShoot;
         private float xTime;
         private float fireTimeData;
 
-        private void Awake()
+        private void Start()
         {
             fireTimeData = 0.5f;
+            directionToShoot = FirstDirectionToShoot;
         }
 
         private void Update()
         {
-            if (!anime.GetCurrentAnimatorStateInfo(0).IsName("BCover") && FindObjectOfType<playerMovement>().inPosition)
+            if (!anime.GetCurrentAnimatorStateInfo(0).IsName("BCover") && wp.isPlayerRecherdHere)
             {
                 fireTimeData -= Time.deltaTime;
-                transform.LookAt(directionToShoot);
+                Rotation();
+                /*transform.LookAt(directionToShoot);*/
             }
                 
             if (fireTimeData <= 0 && !isDead)
@@ -56,12 +62,20 @@ namespace guns.Control
         }
 
         float x, y;
-        
 
+        private Transform rotationTarget;
+        private Quaternion Rotate;
+        public void Rotation()
+        {
+            //rotationTarget.position = directionToShoot;
+            Vector3 direction = directionToShoot - transform.position;
+            Rotate = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Rotate, RotationSpeed);
+        }
 
         public void check()
         {
-            if (FindObjectOfType<playerMovement>().inPosition)
+            if (wp.isPlayerRecherdHere)
             {
                 anime.SetTrigger("Shoot");               
             }
@@ -96,7 +110,7 @@ namespace guns.Control
         }
 
 
-        bool isDead = false;
+       [HideInInspector]public bool isDead = false;
 
         public void die()
         {
