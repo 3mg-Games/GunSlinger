@@ -6,20 +6,37 @@ namespace guns.Control
 {
     public class eTakeDamage : MonoBehaviour
     {
-        public enum collisionType { Head, Body, Arm}
+        public bool isWalkIn = false;
+        public enum collisionType { Head, Body, Arm }
         public collisionType damageType;
         public enemyContoller controller;
+        public enemyContollerWalkIn controller2;
 
         public void HIT(float value)
         {
-            try
+            if (!isWalkIn)
             {
-                controller.health -= value;
-                
+                try
+                {
+                    controller.health -= value;
+
+                }
+                catch
+                {
+                    print("Enemy Controller is missing............" + transform.name);
+                }
             }
-            catch
+            if (isWalkIn)
             {
-                print("Enemy Controller is missing............" + transform.name);
+                try
+                {
+                    controller2.health -= value;
+
+                }
+                catch
+                {
+                    print("Enemy Controller is missing............" + transform.name);
+                }
             }
         }
     }

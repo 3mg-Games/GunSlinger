@@ -30,7 +30,7 @@ public class Train : MonoBehaviour
     {
       //  Debug.Log("Enemy knock off happened");
         
-        enemyContoller enemyHenchman = other.GetComponent<enemyContoller>();
+        enemyContollerWalkIn enemyHenchman = other.GetComponent<enemyContollerWalkIn>();
         if(enemyHenchman)
         {
             other.GetComponent<Rigidbody>().isKinematic = false;   //set the rigidbody of enemey to Kinematic

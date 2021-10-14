@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using guns.Core;
 using guns.movement;
 
@@ -8,8 +9,11 @@ namespace guns.Control
 {
     public class enemyContollerWalkIn : MonoBehaviour
     {
-        public Animator anime;
+        private NavMeshAgent agent;
+        public Transform targetPosition;
+        public bool reachedAtPoint;
 
+        public Animator anime;
         public GameObject bullet;
         public Transform shootPoint;
         public Transform player_position;
@@ -18,7 +22,7 @@ namespace guns.Control
         public Vector2 MinXYOffset;
         public Vector2 normalFireRateMaxMin;
         public Vector3 offset;
-        [SerializeField]private Vector3 FirstDirectionToShoot;
+        [SerializeField] private Vector3 FirstDirectionToShoot;
 
 
 
@@ -29,9 +33,9 @@ namespace guns.Control
 
         public float bulletTimeFireRateMultipliar;
 
-      
+
         public List<GameObject> colliders = new List<GameObject>();
-        [HideInInspector]public Vector3 directionToShoot;
+        [HideInInspector] public Vector3 directionToShoot;
         private float xTime;
         private float fireTimeData;
 
@@ -39,27 +43,43 @@ namespace guns.Control
         {
             fireTimeData = 0.5f;
             directionToShoot = FirstDirectionToShoot;
+            agent = GetComponent<NavMeshAgent>();
         }
 
         private void Update()
         {
-            if (!anime.GetCurrentAnimatorStateInfo(0).IsName("BCover") && wp.isPlayerRecherdHere)
+            if (reachedAtPoint)
             {
-                fireTimeData -= Time.deltaTime;
-                Rotation();
-                /*transform.LookAt(directionToShoot);*/
+                anime.SetBool("takeCover", true);
+                if (!anime.GetCurrentAnimatorStateInfo(0).IsName("BCover") && wp.isPlayerRecherdHere)
+                {
+                    fireTimeData -= Time.deltaTime;
+                    Rotation();
+                    /*transform.LookAt(directionToShoot);*/
+                }
+
+                if (fireTimeData <= 0 && !isDead)
+                {
+                    lookAtPlayerInRange();
+                    radomTime();
+                    shoot();
+                    fireTimeData = xTime;
+                }
+                die();
+                check();
             }
-                
-            if (fireTimeData <= 0 && !isDead)
+            if (!reachedAtPoint)
             {
-                lookAtPlayerInRange();
-                radomTime();
-                shoot();
-                fireTimeData = xTime;
+                roadToTargetPosition();
             }
-            die();
-            check();
         }
+
+        void roadToTargetPosition()
+        {
+            if (FindObjectOfType<EnemyWaveProgress>().currentWaveCurrentEnemyIdx == 6)
+                agent.SetDestination(targetPosition.position);
+        }
+
 
         float x, y;
 
@@ -77,7 +97,7 @@ namespace guns.Control
         {
             if (wp.isPlayerRecherdHere)
             {
-                anime.SetTrigger("Shoot");               
+                anime.SetTrigger("Shoot");
             }
         }
 
@@ -86,12 +106,12 @@ namespace guns.Control
             if (shootPoint == null)
                 return;
 
-            if(shootPoint != null)
-            {                              
+            if (shootPoint != null)
+            {
                 GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
-                Bullet.GetComponent<Rigidbody>().AddForce((transform.forward+offset) * fireForce, ForceMode.Impulse);
+                Bullet.GetComponent<Rigidbody>().AddForce((transform.forward + offset) * fireForce, ForceMode.Impulse);
                 Destroy(Bullet, 3f);
-            }            
+            }
         }
 
         public void lookAtPlayerInRange()
@@ -103,23 +123,28 @@ namespace guns.Control
 
         void radomTime()
         {
-            if(!FindObjectOfType<timeManager>().timeTriggered)
-                xTime = Random.Range(normalFireRateMaxMin.x , normalFireRateMaxMin.y);
-            if(FindObjectOfType<timeManager>().timeTriggered)
+            if (!FindObjectOfType<timeManager>().timeTriggered)
+                xTime = Random.Range(normalFireRateMaxMin.x, normalFireRateMaxMin.y);
+            if (FindObjectOfType<timeManager>().timeTriggered)
                 xTime = Random.Range(normalFireRateMaxMin.x / bulletTimeFireRateMultipliar, normalFireRateMaxMin.y / bulletTimeFireRateMultipliar);
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.CompareTag("EWayP"))
+                reachedAtPoint = true;
+        }
 
-       [HideInInspector]public bool isDead = false;
+        [HideInInspector] public bool isDead = false;
 
         public void die()
         {
-            if(health <= 0 && !isDead)
+            if (health <= 0 && !isDead)
             {
                 anime.SetTrigger("Die");
                 Destroy(gameObject, 2);
                 FindObjectOfType<EnemyWaveProgress>().KillEnemyInCurrentWave();
-                for(int i=0;i< colliders.Count; i++)
+                for (int i = 0; i < colliders.Count; i++)
                 {
                     colliders[i].GetComponent<Collider>().enabled = false;
                 }

@@ -17,10 +17,10 @@ namespace guns.Control
 
         private void Update()
         {
-            if (multipleWaves)
+            if (multipleWaves && !walkin)
                 checkForEnemy();
 
-            if (walkin)
+            if (multipleWaves && walkin)
                 checkForEnemy2();
         }
 

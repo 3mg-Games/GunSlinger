@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Player Projectile
   - Shootable
+  - EWayP
   layers:
   - Default
   - TransparentFX

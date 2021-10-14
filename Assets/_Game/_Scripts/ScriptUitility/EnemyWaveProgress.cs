@@ -106,11 +106,12 @@ namespace guns.Control
         }
         public void KillEnemyInCurrentWave()
         {
-            crossMark[currentWaveCurrentEnemyIdx].SetActive(true);
-            if (currentWaveCurrentEnemyIdx <= crossMark.Count)
-            {
+            //crossMark[currentWaveCurrentEnemyIdx].SetActive(true);
                 currentWaveCurrentEnemyIdx++;                
-            }
+
+            /*if (currentWaveCurrentEnemyIdx <= crossMark.Count)
+            {
+            }*/
         }
 
     }
