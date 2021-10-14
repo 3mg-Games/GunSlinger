@@ -11,14 +11,13 @@ namespace guns.Control
         public float slowdownLength = 2f;
         public float firedownLength = 2f;
 
-        [HideInInspector]
         public float slowdownLimit = 0;
 
         public float firedownLimit = 0;
 
         public bool timeTriggered;
 
-        bool reduceTime;
+        private bool reduceTime;
 
         private void Update()
         {
@@ -32,7 +31,7 @@ namespace guns.Control
 
                 if (slowdownLimit <= 0)
                 {
-                    //Time.timeScale = 1;
+                    Time.timeScale = 1;
                     reduceTime = false;
                     FindObjectOfType<GameManager>().CinemachineCam.SetBool("3to1", false);
                     FindObjectOfType<GameManager>().BulletTimer.SetActive(false);
@@ -61,8 +60,11 @@ namespace guns.Control
         public void DoSlowmotion()
         {
             reduceTime = true;
-            slowdownLimit = slowdownLength;
-            firedownLimit = firedownLength;
+            slowdownLimit = slowdownLength;                        
+        }
+
+        public void SlowMotionActivate()
+        {
             Time.timeScale = slowdownFactor;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
