@@ -17,7 +17,7 @@ namespace guns.Control
 
         void reloadSound()
         {
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().ReloadGun, 1);
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().ReloadGun, FindObjectOfType<GameManager>().valume);
         }
         void startTapping()
         {
@@ -38,6 +38,12 @@ namespace guns.Control
         void resetCover()
         {
             FindObjectOfType<playerMovement>().anime.SetBool("Take Cover", false); ;
+        }
+
+        void levelComplete()
+        {
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().LevelComplete, FindObjectOfType<GameManager>().valume);
+            
         }
         void ResetTime()
         {

@@ -48,8 +48,9 @@ namespace guns.Core
 
         [Header("Audio")]
         public AudioSource source;
-
-        public AudioClip BulletFiredbyPlayer;
+        [Range(0, 1)]
+        public float valume;
+        public AudioClip BulletFiredbyPlayer;        
         public AudioClip BulletFiredbyEnemy;
         public AudioClip EnemyBulletImpactOnGround;
         public AudioClip ReloadGun;

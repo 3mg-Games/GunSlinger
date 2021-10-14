@@ -14,7 +14,7 @@ namespace guns.Control
         private float trailTimer = 0;
         private void Start()
         {
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyEnemy, 0.7f);
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyEnemy, FindObjectOfType<GameManager>().valume);
         }
 
 
@@ -49,7 +49,7 @@ namespace guns.Control
 
         private void OnCollisionEnter(Collision collision)
         {
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().EnemyBulletImpactOnGround, 0.7f);
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().EnemyBulletImpactOnGround, FindObjectOfType<GameManager>().valume);
             Destroy(gameObject);
         }
     }
