@@ -10,6 +10,8 @@ using guns.Control;
 public class Train : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] AudioClip trainSfx;
+    [SerializeField] [Range(0f, 1f)] float trainSfxVolume;
    
     // Start is called before the first frame update
     void Start()
@@ -38,5 +40,6 @@ public class Train : MonoBehaviour
     public void ActivateTrain()
     {
         animator.SetTrigger("Move");     //activate move anim on train
+        AudioSource.PlayClipAtPoint(trainSfx, Camera.main.transform.position, trainSfxVolume);
     }
 }

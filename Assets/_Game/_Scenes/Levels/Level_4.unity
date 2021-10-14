@@ -2098,6 +2098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1148021640}
+  trainSfx: {fileID: 8300000, guid: 6b73eaaf87dfc774e82ae1bc4d150f9b, type: 3}
+  trainSfxVolume: 0
 --- !u!4 &1148021642
 Transform:
   m_ObjectHideFlags: 0
