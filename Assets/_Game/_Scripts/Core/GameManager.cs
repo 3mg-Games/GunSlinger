@@ -54,6 +54,8 @@ namespace guns.Core
         public AudioClip EnemyBulletImpactOnGround;
         public AudioClip ReloadGun;
         public AudioClip LevelComplete;
+        public AudioClip trainSfx;
+        public AudioClip woodenLogs;
 
         private void Awake()
         {

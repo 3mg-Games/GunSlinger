@@ -316,6 +316,8 @@ MonoBehaviour:
     type: 3}
   ReloadGun: {fileID: 8300000, guid: 2f672a8d937b27943852f8ec9135fed9, type: 3}
   LevelComplete: {fileID: 0}
+  trainSfx: {fileID: 8300000, guid: 5b81ec01c1db21742a0f67821bce8b21, type: 3}
+  woodenLogs: {fileID: 0}
 --- !u!4 &33424414
 Transform:
   m_ObjectHideFlags: 0
@@ -2098,8 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1148021640}
-  trainSfx: {fileID: 8300000, guid: 6b73eaaf87dfc774e82ae1bc4d150f9b, type: 3}
-  trainSfxVolume: 0
+  trainSfxVolume: 1
 --- !u!4 &1148021642
 Transform:
   m_ObjectHideFlags: 0
