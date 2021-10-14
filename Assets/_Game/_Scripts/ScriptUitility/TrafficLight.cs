@@ -15,8 +15,8 @@ using UnityEngine;
 
 public class TrafficLight : MonoBehaviour
 {
-    [SerializeField] GameObject redLight;
-    [SerializeField] GameObject greenLight;
+    [SerializeField] GameObject[] redLights;
+    [SerializeField] GameObject[] greenLights;
     [SerializeField] Train train;
     [SerializeField] Outline outline;
     [SerializeField] GameObject sparkVfxPrefab;
@@ -49,8 +49,17 @@ public class TrafficLight : MonoBehaviour
             other.transform.position,
             Quaternion.identity);
         Destroy(sparkVfx, duartionOfSparkVfx);
-        redLight.SetActive(false);
-        greenLight.SetActive(true);
+        foreach(GameObject redLight in redLights)
+        {
+            redLight.SetActive(false);
+        }
+
+        foreach(GameObject greenLight in greenLights)
+        {
+            greenLight.SetActive(true);
+        }
+        
+        
         train.ActivateTrain();
         outline.enabled = false;
     }
