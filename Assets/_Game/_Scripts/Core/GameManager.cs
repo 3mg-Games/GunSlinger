@@ -49,10 +49,12 @@ namespace guns.Core
         [Header("Audio")]
         public AudioSource source;
         [Range(0, 1)]
-        public float valume;
+        public float valumeOfBullets;
         public AudioClip BulletFiredbyPlayer;        
         public AudioClip BulletFiredbyEnemy;
         public AudioClip EnemyBulletImpactOnGround;
+        [Range(0, 1)]
+        public float valumeOfOther;
         public AudioClip ReloadGun;
         public AudioClip LevelComplete;
         public AudioClip trainSfx;
@@ -106,7 +108,7 @@ namespace guns.Core
                 
                 if (TapCount < maxTapCount)
                 {
-                    StartCoroutine(lightReload(0));
+                    StartCoroutine(lightReload(reloadDelay));
                 }
                 if (TapCount >= maxTapCount)
                 {
@@ -115,8 +117,8 @@ namespace guns.Core
                 
             }
 
-            if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count + 1)
-                StartCoroutine(resetTime(0.2f));
+           /* if (StartShooting && FindObjectOfType<playerController>().rotationCount == FindObjectOfType<playerController>().crosshairTransforms.Count + 1)
+                StartCoroutine(resetTime(0.2f));*/
                 
         }
 

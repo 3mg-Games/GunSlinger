@@ -1028,7 +1028,7 @@ PrefabInstance:
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.01
+      value: -2.2
       objectReference: {fileID: 0}
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
@@ -1038,7 +1038,7 @@ PrefabInstance:
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.41
+      value: -38.05
       objectReference: {fileID: 0}
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
@@ -2039,7 +2039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
-  slowdownLength: 0.5
+  slowdownLength: 6
   firedownLength: 2
   slowdownLimit: 0
   firedownLimit: 0
@@ -2067,7 +2067,7 @@ MonoBehaviour:
     type: 3}
   BulletTimer: {fileID: 1677623120}
   slowMotionDelay: 0.5
-  reloadDelay: 1.5
+  reloadDelay: 0.2
   maxTapCount: 6
   NumOfHenchmanToKill: 4
   numberOfBulletsUsed: 0
@@ -2078,11 +2078,12 @@ MonoBehaviour:
   Reload: 0
   GameOver: 0
   source: {fileID: 940351033}
-  valume: 1
+  valumeOfBullets: 0.7
   BulletFiredbyPlayer: {fileID: 8300000, guid: 82ae00c3cc0996a42b0bf3c4d837f7fb, type: 3}
   BulletFiredbyEnemy: {fileID: 8300000, guid: 3b4a946f86d79654189b70e00b95d05f, type: 3}
   EnemyBulletImpactOnGround: {fileID: 8300000, guid: 8f7766ed04e5f474ba7d68e0ca1c235a,
     type: 3}
+  valumeOfOther: 1
   ReloadGun: {fileID: 8300000, guid: 2f672a8d937b27943852f8ec9135fed9, type: 3}
   LevelComplete: {fileID: 8300000, guid: 532fd47816ce0ff44937a81835541adb, type: 3}
   trainSfx: {fileID: 0}
@@ -3125,7 +3126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1251610401}
   m_LocalRotation: {x: -0.08424905, y: -0.5624059, z: 0.057745844, w: 0.82052857}
-  m_LocalPosition: {x: 1.28, y: -7.45, z: 8.73}
+  m_LocalPosition: {x: 0.39, y: -7.44, z: 8.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5776416741392263371}
@@ -3926,7 +3927,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746558406}
   m_LocalRotation: {x: -0.8635201, y: -0.054004554, z: -0.48157698, w: -0.13964318}
-  m_LocalPosition: {x: 2.59, y: -6.44, z: 9.16}
+  m_LocalPosition: {x: 1.7, y: -6.43, z: 9.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5776416741392263371}
@@ -4240,17 +4241,17 @@ PrefabInstance:
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.31
+      value: 0.612936
       objectReference: {fileID: 0}
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45415598
+      value: -0.45637423
       objectReference: {fileID: 0}
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -40.4
+      value: -40.471397
       objectReference: {fileID: 0}
     - target: {fileID: 2708146676901981228, guid: c052059c5fee70d47840744fa3517f67,
         type: 3}
@@ -4444,7 +4445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024702647}
   m_LocalRotation: {x: -0.08424905, y: -0.5624059, z: 0.057745844, w: 0.82052857}
-  m_LocalPosition: {x: -1.39, y: -6.6, z: 12.3}
+  m_LocalPosition: {x: -0.73, y: -6.65, z: 12.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5776416741392263371}
@@ -4537,7 +4538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108082359}
   m_LocalRotation: {x: -0.08332066, y: -0.575375, z: 0.05907743, w: 0.81148696}
-  m_LocalPosition: {x: -0.67, y: -6.74, z: 11.73}
+  m_LocalPosition: {x: -0.01, y: -6.79, z: 11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5776416741392263371}

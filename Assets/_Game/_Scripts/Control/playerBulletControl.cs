@@ -65,7 +65,7 @@ namespace guns.Control
         IEnumerator soundDelay(float t)
         {
             yield return new WaitForSeconds(t);
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer, FindObjectOfType<GameManager>().valume);
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().BulletFiredbyPlayer, FindObjectOfType<GameManager>().valumeOfBullets);
         }
 
 

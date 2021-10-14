@@ -67,7 +67,7 @@ namespace guns.Control
 
         public void SlowMotion()
         {
-            //firedownLimit = firedownLength;
+            firedownLimit = firedownLength;
             Time.timeScale = slowdownFactor;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }

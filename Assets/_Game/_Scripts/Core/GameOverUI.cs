@@ -72,15 +72,15 @@ namespace guns.Core
 
             if (L3)
             {
-                if (Gm.numberOfBulletsUsed == 2)
+                if (Gm.numberOfBulletsUsed == 3)
                 {
                     scoreUI.Play("3H");
                 }
-                if (Gm.numberOfBulletsUsed == 3)
+                if (Gm.numberOfBulletsUsed == 4)
                 {
                     scoreUI.Play("2H");
                 }
-                if (Gm.numberOfBulletsUsed > 3)
+                if (Gm.numberOfBulletsUsed > 4)
                 {
                     scoreUI.Play("1H");
                 }

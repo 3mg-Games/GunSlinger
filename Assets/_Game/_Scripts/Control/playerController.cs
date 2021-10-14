@@ -17,11 +17,11 @@ namespace guns.Control {
         public Vector3 rotationOffset;
         
         public float fireForce = 10;
-        public float shootDelayTime = 2;
+        public float RotateAndFireDelay = 2;
         public float damageAmount = 10;
         public float rotationSpeed = 5;
 
-        public float fireDelayTime = 1;
+        public float bulletSpwnDelay = 1;
         public List<Vector3> crosshairPosition = new List<Vector3>();
         public List<Transform> crosshairTransforms = new List<Transform>();
 
@@ -44,12 +44,12 @@ namespace guns.Control {
                 FindObjectOfType<playerMovement>().anime.Play("Shooting");
                 if (shoot <= 0)
                 {
-                    fire();
-                    shoot = shootDelayTime;
+                    RotateAndFire();
+                    shoot = RotateAndFireDelay;
                 }
             }
-            /*if(crosshairPlacingNumber > 0 && rotationCount <= crosshairPlacingNumber && FindObjectOfType<GameManager>().StartShooting)
-                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);*/
+            if(crosshairPlacingNumber > 0 && rotationCount <= crosshairPlacingNumber && FindObjectOfType<GameManager>().StartShooting)
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
         }
         public void raycaster()
         {
@@ -82,25 +82,23 @@ namespace guns.Control {
         private Quaternion rotation;
 
 
-        public void fire()
+        public void RotateAndFire()
         {
             rotationShootTarget = (crosshairTransforms[rotationCount]);
             Vector3 direction = rotationShootTarget.position - transform.position;
             rotation = Quaternion.LookRotation(direction + rotationOffset);
             Quaternion rt = Quaternion.LookRotation(direction);
-            StartCoroutine(spwanEvent(fireDelayTime, crosshairTransforms[rotationCount]));
+            StartCoroutine(spwanEvent(bulletSpwnDelay, crosshairTransforms[rotationCount]));
             transform.rotation = Quaternion.Slerp(transform.rotation, rt, rotationSpeed/* * Time.deltaTime*/);
         }
 
         IEnumerator spwanEvent(float t, Transform obj)
         {                     
-            yield return new WaitForSeconds(t);            
+            yield return new WaitForSeconds(t);
+            if (rotationCount == crosshairPlacingNumber - 1)
+                FindObjectOfType<timeManager>().SlowMotion();
             GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             Bullet.GetComponent<playerBulletControl>().target = obj;
-
-           
-
-          
             FindObjectOfType<GameManager>().numberOfBulletsUsed++;
             rotationCount++;
         }

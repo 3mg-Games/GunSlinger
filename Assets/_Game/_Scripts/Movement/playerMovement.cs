@@ -72,9 +72,13 @@ namespace guns.movement
         }
 
         bool isntRot = false;
-        [HideInInspector] public bool isTookCover = false;
+        public bool isTookCover = false;
         void movementAnimationTrigger()
         {
+            if(!wp.isPlayerRecherdHere)
+                agent.enabled = true;
+
+
             if (!isWalking && wp.isPlayerRecherdHere)
             {
                 if (!isTookCover)
@@ -82,6 +86,7 @@ namespace guns.movement
 
                     anime.SetBool("Take Cover", true);
                     FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0, 0, 0);
+                    agent.enabled = false;
                     isTookCover = true;
 
                 }
@@ -109,7 +114,7 @@ namespace guns.movement
         Quaternion rotation;
         void rotationD()
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0,0), 5 * Time.deltaTime);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0,0), 5 * Time.deltaTime);
         }
 
         private void OnTriggerStay(Collider other)

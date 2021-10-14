@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: b8625644f1100b84bb695e2eb69494c7,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -231,7 +231,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 17c9952d28244a5429fab27bb56b32a5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
     type: 3}
   BulletTimer: {fileID: 1427378206}
   slowMotionDelay: 0.25
-  reloadDelay: 0.1
+  reloadDelay: 0.2
   maxTapCount: 6
   NumOfHenchmanToKill: 3
   numberOfBulletsUsed: 0
@@ -349,11 +349,12 @@ MonoBehaviour:
   Reload: 0
   GameOver: 0
   source: {fileID: 40587909}
-  valume: 1
+  valumeOfBullets: 0.7
   BulletFiredbyPlayer: {fileID: 8300000, guid: 82ae00c3cc0996a42b0bf3c4d837f7fb, type: 3}
   BulletFiredbyEnemy: {fileID: 8300000, guid: 3b4a946f86d79654189b70e00b95d05f, type: 3}
   EnemyBulletImpactOnGround: {fileID: 8300000, guid: 8f7766ed04e5f474ba7d68e0ca1c235a,
     type: 3}
+  valumeOfOther: 1
   ReloadGun: {fileID: 8300000, guid: 2f672a8d937b27943852f8ec9135fed9, type: 3}
   LevelComplete: {fileID: 8300000, guid: 532fd47816ce0ff44937a81835541adb, type: 3}
   trainSfx: {fileID: 0}
@@ -371,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
-  slowdownLength: 0.3
+  slowdownLength: 6
   firedownLength: 2
   slowdownLimit: 0
   firedownLimit: 0
@@ -3594,11 +3595,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063984416730835805, guid: 07c2fb14f20be4341a04cca444b24460,
-        type: 3}
-      propertyPath: m_text
-      value: 'Level : 1'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07c2fb14f20be4341a04cca444b24460, type: 3}

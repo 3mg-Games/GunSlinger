@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 2170213886615452291}
-  speed: 500
-  time: 0.025
-  soundDelayTime: 0
+  speed: 100
+  time: 0.4
+  soundDelayTime: 0.1
   target: {fileID: 0}
   d: 0

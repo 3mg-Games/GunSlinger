@@ -17,7 +17,7 @@ namespace guns.Control
 
         void reloadSound()
         {
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().ReloadGun, FindObjectOfType<GameManager>().valume);
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().ReloadGun, FindObjectOfType<GameManager>().valumeOfOther);
         }
         void startTapping()
         {
@@ -42,7 +42,7 @@ namespace guns.Control
 
         void levelComplete()
         {
-            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().LevelComplete, FindObjectOfType<GameManager>().valume);
+            FindObjectOfType<GameManager>().source.PlayOneShot(FindObjectOfType<GameManager>().LevelComplete, FindObjectOfType<GameManager>().valumeOfOther);
             
         }
         void ResetTime()
