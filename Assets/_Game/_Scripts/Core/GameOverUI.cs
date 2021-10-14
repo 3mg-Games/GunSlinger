@@ -8,6 +8,7 @@ namespace guns.Core
     public class GameOverUI : MonoBehaviour
     {
         public GameObject WinUI;
+        public GameObject confetti;
         public Animator scoreUI;
         public float delay = 1;
         public bool L1, L2, L3,L4;
@@ -16,6 +17,7 @@ namespace guns.Core
         private void Start()
         {
             WinUI.SetActive(false) ;
+            confetti.SetActive(false) ;
             Gm = FindObjectOfType<GameManager>();
         }
 
@@ -26,7 +28,9 @@ namespace guns.Core
         }
 
         IEnumerator winGame(float T)
-        {            
+        {
+            yield return new WaitForSeconds(0.5f);
+            confetti.SetActive(true);
             yield return new WaitForSeconds(T);
             WinUI.SetActive(true);
             checkScore();           
