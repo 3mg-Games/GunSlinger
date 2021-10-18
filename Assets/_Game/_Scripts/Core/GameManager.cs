@@ -193,9 +193,9 @@ namespace guns.Core
             yield return new WaitForSeconds(t);
             FindObjectOfType<playerMovement>().anime.SetTrigger("Reload");
             FindObjectOfType<playerController>().crosshairPosition.Clear();
+            FindObjectOfType<playerController>().crosshairTransforms.Clear();
             FindObjectOfType<playerController>().crosshairPlacingNumber = 0;
             FindObjectOfType<playerController>().rotationCount = 0;
-            FindObjectOfType<playerController>().crosshairTransforms.Clear();
             FindObjectOfType<playerController>().transform.rotation = Quaternion.Euler(0, 0, 0);
             FindObjectOfType<timeManager>().timeTriggered = false;            
             StartShooting = false;

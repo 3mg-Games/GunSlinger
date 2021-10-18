@@ -309,6 +309,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1256365349, guid: 07c2fb14f20be4341a04cca444b24460, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
+      objectReference: {fileID: 0}
     - target: {fileID: 236366801863989032, guid: 07c2fb14f20be4341a04cca444b24460,
         type: 3}
       propertyPath: m_Name
@@ -419,10 +423,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 236366803292824038, guid: 07c2fb14f20be4341a04cca444b24460,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
+      objectReference: {fileID: 0}
     - target: {fileID: 1063984416730835805, guid: 07c2fb14f20be4341a04cca444b24460,
         type: 3}
       propertyPath: m_text
       value: 'Level : 5'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2356058964706120723, guid: 07c2fb14f20be4341a04cca444b24460,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994541760640173479, guid: 07c2fb14f20be4341a04cca444b24460,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07c2fb14f20be4341a04cca444b24460, type: 3}
@@ -644,21 +663,6 @@ PrefabInstance:
       propertyPath: player_position
       value: 
       objectReference: {fileID: 440857707}
-    - target: {fileID: 2708146676901981229, guid: c052059c5fee70d47840744fa3517f67,
-        type: 3}
-      propertyPath: FirstDirectionToShoot.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2708146676901981229, guid: c052059c5fee70d47840744fa3517f67,
-        type: 3}
-      propertyPath: FirstDirectionToShoot.z
-      value: -8.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 3633003002023413606, guid: c052059c5fee70d47840744fa3517f67,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c052059c5fee70d47840744fa3517f67, type: 3}
 --- !u!1 &181700216
@@ -2040,7 +2044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowdownLength: 6
-  firedownLength: 2
+  firedownLength: 0.1
   slowdownLimit: 0
   firedownLimit: 0
   timeTriggered: 0

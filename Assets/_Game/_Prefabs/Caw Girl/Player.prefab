@@ -163,10 +163,10 @@ MonoBehaviour:
   crosshairOffset: {x: 0, y: 0, z: 0.05}
   rotationOffset: {x: -0.7, y: -0.8, z: 0}
   fireForce: 75
-  RotateAndFireDelay: 1.2
+  RotateAndFireDelay: 0.5
   damageAmount: 100
-  rotationSpeed: 2.5
-  bulletSpwnDelay: 1
+  rotationSpeed: 5
+  bulletSpwnDelay: 0.3
   crosshairPosition: []
   crosshairTransforms: []
   crosshairPlacingNumber: 0

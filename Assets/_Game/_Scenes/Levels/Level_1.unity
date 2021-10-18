@@ -338,7 +338,7 @@ MonoBehaviour:
     type: 3}
   BulletTimer: {fileID: 1427378206}
   slowMotionDelay: 0.25
-  reloadDelay: 0.2
+  reloadDelay: 1
   maxTapCount: 6
   NumOfHenchmanToKill: 3
   numberOfBulletsUsed: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowdownLength: 6
-  firedownLength: 2
+  firedownLength: 0.1
   slowdownLimit: 0
   firedownLimit: 0
   timeTriggered: 0
@@ -3486,6 +3486,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1256365349, guid: 07c2fb14f20be4341a04cca444b24460, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
+      objectReference: {fileID: 0}
     - target: {fileID: 236366801863989032, guid: 07c2fb14f20be4341a04cca444b24460,
         type: 3}
       propertyPath: m_Name
@@ -3595,6 +3599,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 236366803292824038, guid: 07c2fb14f20be4341a04cca444b24460,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2356058964706120723, guid: 07c2fb14f20be4341a04cca444b24460,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994541760640173479, guid: 07c2fb14f20be4341a04cca444b24460,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -115.799805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07c2fb14f20be4341a04cca444b24460, type: 3}

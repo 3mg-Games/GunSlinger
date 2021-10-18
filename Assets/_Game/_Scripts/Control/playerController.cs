@@ -95,8 +95,7 @@ namespace guns.Control {
         IEnumerator spwanEvent(float t, Transform obj)
         {                     
             yield return new WaitForSeconds(t);
-            if (rotationCount == crosshairPlacingNumber - 1)
-                FindObjectOfType<timeManager>().SlowMotion();
+            
             GameObject Bullet = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             Bullet.GetComponent<playerBulletControl>().target = obj;
             FindObjectOfType<GameManager>().numberOfBulletsUsed++;

@@ -132,7 +132,10 @@ namespace guns.Control
                 health = 0;
 
             else if (ot.gameObject.CompareTag("Shootable"))
+            {
                 health = 0;
+                FindObjectOfType<timeManager>().SlowMotion();
+            }
         }
 
         public void TNTHit()

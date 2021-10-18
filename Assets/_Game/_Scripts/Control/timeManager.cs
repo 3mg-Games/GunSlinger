@@ -40,17 +40,21 @@ namespace guns.Control
                 }
             }
 
-            if (reduceTime)
+           /* if (reduceTime)
             {
-                if (firedownLimit > 0)
-                    firedownLimit -= Time.deltaTime;
-
-                if (firedownLimit <= 0)
-                {
-                    Time.timeScale = 1;
-                }
+                
+            }*/
+            if (firedownLimit > 0)
+            {
+                firedownLimit -= Time.deltaTime;
+                Time.timeScale = slowdownFactor;
+                Time.fixedDeltaTime = Time.timeScale * .02f;
             }
 
+            if (firedownLimit <= 0)
+            {
+                Time.timeScale = 1;
+            }
 
             if (FindObjectOfType<GameManager>().TapCount == FindObjectOfType<GameManager>().maxTapCount)
             {
@@ -66,10 +70,8 @@ namespace guns.Control
         }
 
         public void SlowMotion()
-        {
+        {            
             firedownLimit = firedownLength;
-            Time.timeScale = slowdownFactor;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
         }
     }
 }

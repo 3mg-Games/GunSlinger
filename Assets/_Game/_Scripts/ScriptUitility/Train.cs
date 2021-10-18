@@ -33,6 +33,7 @@ public class Train : MonoBehaviour
         enemyContollerWalkIn enemyHenchman = other.GetComponent<enemyContollerWalkIn>();
         if(enemyHenchman)
         {
+            FindObjectOfType<timeManager>().SlowMotion();
             other.GetComponent<Rigidbody>().isKinematic = false;   //set the rigidbody of enemey to Kinematic
             enemyHenchman.health = 0;        // activate death anim on enemy
         }

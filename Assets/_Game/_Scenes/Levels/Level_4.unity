@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.05
   slowdownLength: 6
-  firedownLength: 2
+  firedownLength: 0.1
   slowdownLimit: 0
   firedownLimit: 0
   timeTriggered: 0
